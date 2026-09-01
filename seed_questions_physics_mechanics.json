@@ -1,0 +1,197 @@
+[
+  {
+    "id": "phys_mech_01",
+    "topic": "phys_mechanics",
+    "stem": "A block of mass m lies on a rough inclined plane of angle theta. If the block slides down the incline at a constant speed, what is the coefficient of kinetic friction mu between the block and the incline?",
+    "difficulty": 2,
+    "flag": null,
+    "options": [
+      ["A", "mu = tan(theta)", null, true],
+      ["B", "mu = sin(theta)", "formula_misapplication", false],
+      ["C", "mu = cos(theta)", "visualization_spatial", false],
+      ["D", "mu = 1.0 independent of angle", "conceptual_misunderstanding", false]
+    ]
+  },
+  {
+    "id": "phys_mech_02",
+    "topic": "phys_mechanics",
+    "stem": "An Atwood machine consists of two masses m1 = 3 kg and m2 = 1 kg connected by a light string over a frictionless pulley. Calculate the acceleration of the system. (g = 10 m/s^2)",
+    "difficulty": 2,
+    "flag": null,
+    "options": [
+      ["A", "5.0 m/s^2", null, true],
+      ["B", "10.0 m/s^2", "conceptual_misunderstanding", false],
+      ["C", "2.5 m/s^2", "procedural_error", false],
+      ["D", "6.67 m/s^2", "formula_misapplication", false]
+    ]
+  },
+  {
+    "id": "phys_mech_03",
+    "topic": "phys_mechanics",
+    "stem": "A particle of mass m is tied to a string of length L and whirled in a vertical circle. At the lowest point, the tension in the string is T. What is the net centripetal force acting on the particle at this point?",
+    "difficulty": 2,
+    "flag": null,
+    "options": [
+      ["A", "T - mg", null, true],
+      ["B", "T + mg", "visualization_spatial", false],
+      ["C", "T", "conceptual_misunderstanding", false],
+      ["D", "mg", "logical_fallacy", false]
+    ]
+  },
+  {
+    "id": "phys_mech_04",
+    "topic": "phys_mechanics",
+    "stem": "A block of mass m is held at rest against a vertical wall by applying a horizontal force F. If the coefficient of static friction is mu, what is the minimum force F required to prevent the block from sliding down?",
+    "difficulty": 2,
+    "flag": null,
+    "options": [
+      ["A", "F = mg / mu", null, true],
+      ["B", "F = mu * mg", "procedural_error", false],
+      ["C", "F = mg / (1 + mu)", "conceptual_synthesis_failure", false],
+      ["D", "F = 1 / mu", "careless_attention_slip", false]
+    ]
+  },
+  {
+    "id": "phys_mech_05",
+    "topic": "phys_mechanics",
+    "stem": "Two blocks A (2 kg) and B (3 kg) are in contact on a smooth horizontal surface. A horizontal force F = 10 N is applied to block A pushing it towards B. Find the contact force exerted by block A on block B.",
+    "difficulty": 2,
+    "flag": null,
+    "options": [
+      ["A", "6 N", null, true],
+      ["B", "10 N", "conceptual_misunderstanding", false],
+      ["C", "4 N", "procedural_error", false],
+      ["D", "2 N", "careless_attention_slip", false]
+    ]
+  },
+  {
+    "id": "phys_mech_06",
+    "topic": "phys_mechanics",
+    "stem": "A person of mass 50 kg stands inside an elevator accelerating upwards at a = 2 m/s^2. What is the apparent weight (normal force) experienced by the person? (g = 10 m/s^2)",
+    "difficulty": 2,
+    "flag": null,
+    "options": [
+      ["A", "600 N", null, true],
+      ["B", "400 N", "visualization_spatial", false],
+      ["C", "500 N", "conceptual_misunderstanding", false],
+      ["D", "100 N", "procedural_error", false]
+    ]
+  },
+  {
+    "id": "phys_mech_07",
+    "topic": "phys_mechanics",
+    "stem": "A rocket burns fuel at a steady rate of dm/dt = 2 kg/s and ejects exhaust gas relative to the rocket at v_ex = 500 m/s. What thrust force is exerted on the rocket by the exhaust?",
+    "difficulty": 2,
+    "flag": null,
+    "options": [
+      ["A", "1000 N", null, true],
+      ["B", "250 N", "procedural_error", false],
+      ["C", "500 N", "careless_attention_slip", false],
+      ["D", "2000 N", "formula_misapplication", false]
+    ]
+  },
+  {
+    "id": "phys_mech_08",
+    "topic": "phys_mechanics",
+    "stem": "A force F = (3i + 4j) N acts at position vector r = (4i + 1j) m relative to the origin. Calculate the magnitude and direction of torque about the origin.",
+    "difficulty": 3,
+    "flag": null,
+    "options": [
+      ["A", "13 k N*m", null, true],
+      ["B", "-13 k N*m", "visualization_spatial", false],
+      ["C", "16 N*m (scalar)", "conceptual_misunderstanding", false],
+      ["D", "7 k N*m", "procedural_error", false]
+    ]
+  },
+  {
+    "id": "phys_mech_09",
+    "topic": "phys_mechanics",
+    "stem": "A 1000 kg car negotiates an unbanked circular curve of radius R = 50 m at a speed of v = 10 m/s. What minimum coefficient of static friction mu_s between tires and road is needed to prevent skidding? (g = 10 m/s^2)",
+    "difficulty": 2,
+    "flag": null,
+    "options": [
+      ["A", "0.20", null, true],
+      ["B", "0.40", "formula_misapplication", false],
+      ["C", "2.00", "procedural_error", false],
+      ["D", "0.02", "careless_attention_slip", false]
+    ]
+  },
+  {
+    "id": "phys_mech_10",
+    "topic": "phys_mechanics",
+    "stem": "A uniform heavy rope of mass M and total length L hangs vertically from a rigid ceiling. What is the tension in the rope at a distance x measured upward from the bottom free end?",
+    "difficulty": 3,
+    "flag": null,
+    "options": [
+      ["A", "T = Mg * (x / L)", null, true],
+      ["B", "T = Mg", "conceptual_misunderstanding", false],
+      ["C", "T = Mg * ((L - x) / L)", "visualization_spatial", false],
+      ["D", "T = Mg * (x^2 / L^2)", "logical_fallacy", false]
+    ]
+  },
+  {
+    "id": "phys_mech_11",
+    "topic": "phys_mechanics",
+    "stem": "A 0.2 kg ball hits a smooth rigid vertical wall normally at 10 m/s and rebounds horizontally in the opposite direction at 8 m/s. What is the magnitude of impulse delivered by the wall to the ball?",
+    "difficulty": 2,
+    "flag": null,
+    "options": [
+      ["A", "3.6 N*s", null, true],
+      ["B", "0.4 N*s", "procedural_error", false],
+      ["C", "1.6 N*s", "careless_attention_slip", false],
+      ["D", "18.0 N*s", "formula_misapplication", false]
+    ]
+  },
+  {
+    "id": "phys_mech_12",
+    "topic": "phys_mechanics",
+    "stem": "What is the ideal banking angle theta for a frictionless circular track of radius r designed for cars moving at speed v?",
+    "difficulty": 2,
+    "flag": null,
+    "options": [
+      ["A", "tan(theta) = v^2 / (r * g)", null, true],
+      ["B", "sin(theta) = v^2 / (r * g)", "formula_misapplication", false],
+      ["C", "tan(theta) = (r * g) / v^2", "procedural_error", false],
+      ["D", "tan(theta) = v / (r * g)", "conceptual_synthesis_failure", false]
+    ]
+  },
+  {
+    "id": "phys_mech_13",
+    "topic": "phys_mechanics",
+    "stem": "A uniform ladder stands leaning against a frictionless vertical wall while its base rests on a rough horizontal floor. Which horizontal force prevents the base of the ladder from slipping?",
+    "difficulty": 2,
+    "flag": null,
+    "options": [
+      ["A", "Static friction force exerted by the floor pointing toward the wall", null, true],
+      ["B", "Normal reaction force exerted by the vertical wall pointing away from the wall", "conceptual_misunderstanding", false],
+      ["C", "Vertical normal reaction force exerted by the floor", "visualization_spatial", false],
+      ["D", "Gravitational force acting downward at the center of mass", "logical_fallacy", false]
+    ]
+  },
+  {
+    "id": "phys_mech_14",
+    "topic": "phys_mechanics",
+    "stem": "A block of mass m rests on a horizontal plank. The plank is accelerated horizontally with acceleration 'a'. If the block does not slip relative to the plank, what is the magnitude and direction of the static friction force acting on the block?",
+    "difficulty": 3,
+    "flag": null,
+    "options": [
+      ["A", "m * a in the direction of acceleration", null, true],
+      ["B", "mu_s * m * g opposite to direction of acceleration", "conceptual_misunderstanding", false],
+      ["C", "m * a opposite to direction of acceleration", "visualization_spatial", false],
+      ["D", "Zero force because the block is stationary relative to the plank", "logical_fallacy", false]
+    ]
+  },
+  {
+    "id": "phys_mech_15",
+    "topic": "phys_mechanics",
+    "stem": "A uniform solid disk of moment of inertia I = 2 kg*m^2 rotates initially at angular velocity omega = 10 rad/s. A constant retarding torque tau = 4 N*m is applied. How long does it take for the disk to come to rest?",
+    "difficulty": 2,
+    "flag": null,
+    "options": [
+      ["A", "5.0 seconds", null, true],
+      ["B", "20.0 seconds", "procedural_error", false],
+      ["C", "2.5 seconds", "formula_misapplication", false],
+      ["D", "0.2 seconds", "careless_attention_slip", false]
+    ]
+  }
+]

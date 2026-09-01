@@ -1,0 +1,197 @@
+[
+  {
+    "id": "phys_eng_01",
+    "topic": "phys_energy_momentum",
+    "stem": "A simple pendulum of length L and mass m completes one full oscillation. What is the net work done by gravity on the pendulum bob?",
+    "difficulty": 1,
+    "flag": null,
+    "options": [
+      ["A", "0 J", null, true],
+      ["B", "2 mgL", "conceptual_misunderstanding", false],
+      ["C", "mgL", "formula_misapplication", false],
+      ["D", "-mgL", "careless_attention_slip", false]
+    ]
+  },
+  {
+    "id": "phys_eng_02",
+    "topic": "phys_circular_rotation",
+    "stem": "A solid uniform sphere of mass M and radius R rolls without slipping down an incline. What fraction of its total kinetic energy is rotational kinetic energy?",
+    "difficulty": 3,
+    "flag": null,
+    "options": [
+      ["A", "2/7", null, true],
+      ["B", "5/7", "procedural_error", false],
+      ["C", "1/2", "conceptual_misunderstanding", false],
+      ["D", "2/5", "formula_misapplication", false]
+    ]
+  },
+  {
+    "id": "phys_eng_03",
+    "topic": "phys_energy_momentum",
+    "stem": "Object A (mass 2 kg, velocity 3 m/s East) collides with Object B (mass 1 kg, velocity 4 m/s North) and they stick together. What is the speed of the combined mass after collision?",
+    "difficulty": 3,
+    "flag": null,
+    "options": [
+      ["A", "2.40 m/s", null, true],
+      ["B", "3.33 m/s", "visualization_spatial", false],
+      ["C", "5.20 m/s", "formula_misapplication", false],
+      ["D", "2.33 m/s", "procedural_error", false]
+    ]
+  },
+  {
+    "id": "phys_eng_04",
+    "topic": "phys_circular_rotation",
+    "stem": "A ball of mass m attached to a string of length R is rotated in a vertical circle. What is the minimum speed required at the top of the loop to keep the string taut?",
+    "difficulty": 2,
+    "flag": null,
+    "options": [
+      ["A", "sqrt(g*R)", null, true],
+      ["B", "sqrt(2*g*R)", "formula_misapplication", false],
+      ["C", "0 m/s", "conceptual_misunderstanding", false],
+      ["D", "sqrt(5*g*R)", "careless_attention_slip", false]
+    ]
+  },
+  {
+    "id": "phys_eng_05",
+    "topic": "phys_energy_momentum",
+    "stem": "A variable force F(x) = 3x^2 + 2 (in Newtons) acts on a 2 kg mass along the x-axis from x = 0 to x = 2 m. If it starts from rest, what is its kinetic energy at x = 2 m?",
+    "difficulty": 2,
+    "flag": null,
+    "options": [
+      ["A", "12 J", null, true],
+      ["B", "14 J", "procedural_error", false],
+      ["C", "28 J", "formula_misapplication", false],
+      ["D", "6 J", "careless_attention_slip", false]
+    ]
+  },
+  {
+    "id": "phys_eng_06",
+    "topic": "phys_energy_momentum",
+    "stem": "A car of mass m accelerates from rest with constant acceleration a. What is the instantaneous power delivered by the engine as a function of time t?",
+    "difficulty": 2,
+    "flag": null,
+    "options": [
+      ["A", "m * a^2 * t", null, true],
+      ["B", "0.5 * m * a^2 * t", "formula_misapplication", false],
+      ["C", "m * a * t", "conceptual_misunderstanding", false],
+      ["D", "m * a^2 * t^2", "procedural_error", false]
+    ]
+  },
+  {
+    "id": "phys_eng_07",
+    "topic": "phys_energy_momentum",
+    "stem": "A force-time graph for a particle is a triangle with base along the t-axis from t=0 to t=6 s and peak force 10 N at t=3 s. What is the magnitude of impulse delivered?",
+    "difficulty": 2,
+    "flag": null,
+    "options": [
+      ["A", "30 N s", null, true],
+      ["B", "60 N s", "conceptual_misunderstanding", false],
+      ["C", "15 N s", "careless_attention_slip", false],
+      ["D", "5 N s", "formula_misapplication", false]
+    ]
+  },
+  {
+    "id": "phys_eng_08",
+    "topic": "phys_energy_momentum",
+    "stem": "A shell of mass 3m moving horizontally with speed v0 explodes into two fragments. One piece of mass m falls vertically with zero horizontal speed. What is the horizontal speed of the remaining 2m fragment?",
+    "difficulty": 3,
+    "flag": null,
+    "options": [
+      ["A", "1.5 * v0", null, true],
+      ["B", "v0", "conceptual_misunderstanding", false],
+      ["C", "3.0 * v0", "procedural_error", false],
+      ["D", "0.67 * v0", "formula_misapplication", false]
+    ]
+  },
+  {
+    "id": "phys_eng_09",
+    "topic": "phys_energy_momentum",
+    "stem": "A heavy block of mass M moving at speed V undergoes a head-on elastic collision with a stationary light marble of mass m (where M >> m). What is the approximate speed of the marble after collision?",
+    "difficulty": 3,
+    "flag": null,
+    "options": [
+      ["A", "2 * V", null, true],
+      ["B", "V", "conceptual_misunderstanding", false],
+      ["C", "0", "logical_fallacy", false],
+      ["D", "0.5 * V", "procedural_error", false]
+    ]
+  },
+  {
+    "id": "phys_eng_10",
+    "topic": "phys_circular_rotation",
+    "stem": "A curved road of radius R is banked at angle theta so that a car traveling at speed v can negotiate the turn without friction. Which formula correctly expresses theta?",
+    "difficulty": 2,
+    "flag": null,
+    "options": [
+      ["A", "tan(theta) = v^2 / (R * g)", null, true],
+      ["B", "sin(theta) = v^2 / (R * g)", "formula_misapplication", false],
+      ["C", "tan(theta) = v / (R * g)", "careless_attention_slip", false],
+      ["D", "tan(theta) = R * g / v^2", "visualization_spatial", false]
+    ]
+  },
+  {
+    "id": "phys_eng_11",
+    "topic": "phys_energy_momentum",
+    "stem": "The potential energy function of a system is given by U(x) = x^3 - 3x (in Joules). What is the equilibrium state of the particle at x = 1 m?",
+    "difficulty": 3,
+    "flag": null,
+    "options": [
+      ["A", "Stable equilibrium", null, true],
+      ["B", "Unstable equilibrium", "conceptual_misunderstanding", false],
+      ["C", "Not an equilibrium position", "procedural_error", false],
+      ["D", "Neutral equilibrium", "logical_fallacy", false]
+    ]
+  },
+  {
+    "id": "phys_eng_12",
+    "topic": "phys_circular_rotation",
+    "stem": "A conical pendulum consists of a mass m on a string of length L swinging in a horizontal circle at constant angular velocity omega. What is the tension T in the string?",
+    "difficulty": 3,
+    "flag": null,
+    "options": [
+      ["A", "m * omega^2 * L", null, true],
+      ["B", "m * omega^2 * r", "formula_misapplication", false],
+      ["C", "m * g", "conceptual_misunderstanding", false],
+      ["D", "m * g * tan(theta)", "visualization_spatial", false]
+    ]
+  },
+  {
+    "id": "phys_eng_13",
+    "topic": "phys_energy_momentum",
+    "stem": "A block of mass m is dropped from height h above an uncompressed vertical spring of stiffness k. Which equation determines the maximum compression x of the spring?",
+    "difficulty": 3,
+    "flag": null,
+    "options": [
+      ["A", "mg(h + x) = 0.5 * k * x^2", null, true],
+      ["B", "mgh = 0.5 * k * x^2", "conceptual_synthesis_failure", false],
+      ["C", "mg(h - x) = 0.5 * k * x^2", "visualization_spatial", false],
+      ["D", "mgh = k * x", "formula_misapplication", false]
+    ]
+  },
+  {
+    "id": "phys_eng_14",
+    "topic": "phys_circular_rotation",
+    "stem": "A particle moves along a circular path of radius R at constant speed v under centripetal force Fc. How much work is done by Fc during half a revolution?",
+    "difficulty": 1,
+    "flag": null,
+    "options": [
+      ["A", "0 J", null, true],
+      ["B", "Fc * pi * R", "conceptual_misunderstanding", false],
+      ["C", "2 * Fc * R", "visualization_spatial", false],
+      ["D", "Fc * 2 * pi * R", "formula_misapplication", false]
+    ]
+  },
+  {
+    "id": "phys_eng_15",
+    "topic": "phys_energy_momentum",
+    "stem": "A ball dropped from height H rebounds to height h after hitting a floor. What is the coefficient of restitution e for the impact?",
+    "difficulty": 2,
+    "flag": null,
+    "options": [
+      ["A", "sqrt(h / H)", null, true],
+      ["B", "h / H", "formula_misapplication", false],
+      ["C", "H / h", "procedural_error", false],
+      ["D", "sqrt(H / h)", "careless_attention_slip", false]
+    ]
+  }
+]

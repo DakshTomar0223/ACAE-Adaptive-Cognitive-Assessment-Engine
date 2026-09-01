@@ -1,0 +1,12 @@
+{
+  "student_id": "STU001",
+  "topic_id": "phys_kinematics_2d",
+  "total_attempts": 0,
+  "accuracy_pct": 0,
+  "chart_data": [],
+  "weak_point_info": {
+    "status": "no_signal",
+    "message": "No attempts logged for this topic yet \u2014 serve general practice.",
+    "timing_flags": []
+  }
+}

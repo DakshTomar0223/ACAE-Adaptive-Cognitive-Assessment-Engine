@@ -1,0 +1,197 @@
+[
+  {
+    "id": "phys_kin_01",
+    "topic": "phys_kinematics_1d",
+    "stem": "A car accelerates uniformly from rest to 30 m/s in 6 seconds. What is the distance covered during this time?",
+    "difficulty": 2,
+    "flag": null,
+    "options": [
+      ["A", "90 m", null, true],
+      ["B", "180 m", "formula_misapplication", false],
+      ["C", "45 m", "procedural_error", false],
+      ["D", "15 m", "conceptual_misunderstanding", false]
+    ]
+  },
+  {
+    "id": "phys_kin_02",
+    "topic": "phys_kinematics_2d",
+    "stem": "A stone is launched with initial speed 20 m/s at an angle of 60 degrees above the horizontal. Calculate its maximum height above the launch point. (g = 10 m/s^2)",
+    "difficulty": 2,
+    "flag": null,
+    "options": [
+      ["A", "15 m", null, true],
+      ["B", "20 m", "formula_misapplication", false],
+      ["C", "5 m", "visualization_spatial", false],
+      ["D", "30 m", "procedural_error", false]
+    ]
+  },
+  {
+    "id": "phys_kin_03",
+    "topic": "phys_kinematics_1d",
+    "stem": "A position-time graph x(t) for an object moving along the x-axis is a parabola opening downwards. What can be concluded about its motion?",
+    "difficulty": 2,
+    "flag": null,
+    "options": [
+      ["A", "The object experiences constant negative acceleration.", null, true],
+      ["B", "The object is moving at constant velocity.", "conceptual_misunderstanding", false],
+      ["C", "The acceleration of the object is continuously increasing.", "logical_fallacy", false],
+      ["D", "The object is moving in a circular path.", "visualization_spatial", false]
+    ]
+  },
+  {
+    "id": "phys_kin_04",
+    "topic": "phys_kinematics_1d",
+    "stem": "The position of a particle is given by x(t) = 2t^3 - 9t^2 + 12t (in meters). At what time(s) is the particle instantaneously at rest?",
+    "difficulty": 3,
+    "flag": null,
+    "options": [
+      ["A", "t = 1 s and t = 2 s", null, true],
+      ["B", "t = 1.5 s", "formula_misapplication", false],
+      ["C", "t = 3 s", "procedural_error", false],
+      ["D", "t = 0 s", "careless_attention_slip", false]
+    ]
+  },
+  {
+    "id": "phys_kin_05",
+    "topic": "phys_kinematics_1d",
+    "stem": "Train A moves North at 80 km/h and Train B moves South at 60 km/h along parallel tracks. What is the velocity of Train B relative to Train A?",
+    "difficulty": 2,
+    "flag": null,
+    "options": [
+      ["A", "140 km/h South", null, true],
+      ["B", "20 km/h South", "procedural_error", false],
+      ["C", "140 km/h North", "careless_attention_slip", false],
+      ["D", "100 km/h South", "visualization_spatial", false]
+    ]
+  },
+  {
+    "id": "phys_kin_06",
+    "topic": "phys_kinematics_2d",
+    "stem": "A boat can travel at 5 m/s in still water. It crosses a river flowing at 3 m/s while steering perpendicular to the riverbank. What is the magnitude of the boat's velocity relative to the bank?",
+    "difficulty": 2,
+    "flag": null,
+    "options": [
+      ["A", "5.83 m/s", null, true],
+      ["B", "8.0 m/s", "conceptual_misunderstanding", false],
+      ["C", "2.0 m/s", "procedural_error", false],
+      ["D", "4.0 m/s", "formula_misapplication", false]
+    ]
+  },
+  {
+    "id": "phys_kin_07",
+    "topic": "phys_kinematics_1d",
+    "stem": "An object moves with acceleration a = -2v, where v is velocity. If its initial velocity at t=0 is v0, what is v(t)?",
+    "difficulty": 3,
+    "flag": null,
+    "options": [
+      ["A", "v0 * e^(-2t)", null, true],
+      ["B", "v0 - 2t", "formula_misapplication", false],
+      ["C", "v0 - t^2", "procedural_error", false],
+      ["D", "v0 / (1 + 2t)", "conceptual_misunderstanding", false]
+    ]
+  },
+  {
+    "id": "phys_kin_08",
+    "topic": "phys_kinematics_2d",
+    "stem": "A projectile is launched from ground level with speed u at angle theta. If the launch angle is changed from 30 degrees to 60 degrees with speed kept constant, how does horizontal range R change?",
+    "difficulty": 2,
+    "flag": null,
+    "options": [
+      ["A", "Horizontal range remains unchanged.", null, true],
+      ["B", "Horizontal range doubles.", "conceptual_synthesis_failure", false],
+      ["C", "Horizontal range increases by a factor of sqrt(3).", "procedural_error", false],
+      ["D", "Horizontal range is halved.", "logical_fallacy", false]
+    ]
+  },
+  {
+    "id": "phys_kin_09",
+    "topic": "phys_kinematics_1d",
+    "stem": "A particle moves in a straight line with v(t) given as a triangle above the t-axis from t=0 to t=4 s (peak v=6 m/s at t=2 s) and a rectangle below the t-axis from t=4 to t=6 s (v=-3 m/s). What is its net displacement?",
+    "difficulty": 3,
+    "flag": null,
+    "options": [
+      ["A", "6 m", null, true],
+      ["B", "18 m", "conceptual_misunderstanding", false],
+      ["C", "12 m", "careless_attention_slip", false],
+      ["D", "3 m", "procedural_error", false]
+    ]
+  },
+  {
+    "id": "phys_kin_10",
+    "topic": "phys_kinematics_2d",
+    "stem": "Ball A is dropped from rest from height H. At the same instant, Ball B is thrown horizontally with speed u from height H. Neglecting air resistance, which ball hits the ground first?",
+    "difficulty": 2,
+    "flag": null,
+    "options": [
+      ["A", "Both hit the ground at the exact same time.", null, true],
+      ["B", "Ball A hits first because its path length is shorter.", "visualization_spatial", false],
+      ["C", "Ball B hits first because its total speed is greater.", "conceptual_misunderstanding", false],
+      ["D", "Ball B hits first only if u exceeds a critical velocity.", "logical_fallacy", false]
+    ]
+  },
+  {
+    "id": "phys_kin_11",
+    "topic": "phys_kinematics_2d",
+    "stem": "A car travels around a circular track of radius R = 100 m at a constant speed of v = 20 m/s. What is the magnitude and direction of its acceleration?",
+    "difficulty": 2,
+    "flag": null,
+    "options": [
+      ["A", "4 m/s^2 directed towards the center of the circle", null, true],
+      ["B", "0 m/s^2 because speed is constant", "conceptual_misunderstanding", false],
+      ["C", "4 m/s^2 directed tangentially along motion", "visualization_spatial", false],
+      ["D", "0.2 m/s^2 directed radially outward", "procedural_error", false]
+    ]
+  },
+  {
+    "id": "phys_kin_12",
+    "topic": "phys_kinematics_1d",
+    "stem": "A driver traveling at 20 m/s has a reaction time of 0.5 s. Brakes decelerate the car at 5 m/s^2 once applied. What is total stopping distance?",
+    "difficulty": 3,
+    "flag": null,
+    "options": [
+      ["A", "50 m", null, true],
+      ["B", "40 m", "careless_attention_slip", false],
+      ["C", "80 m", "formula_misapplication", false],
+      ["D", "30 m", "conceptual_synthesis_failure", false]
+    ]
+  },
+  {
+    "id": "phys_kin_13",
+    "topic": "phys_kinematics_1d",
+    "stem": "A runner completes one full lap around a 400 m circular track in 50 seconds. What are average speed and average velocity magnitude, respectively?",
+    "difficulty": 1,
+    "flag": null,
+    "options": [
+      ["A", "8 m/s and 0 m/s", null, true],
+      ["B", "8 m/s and 8 m/s", "conceptual_misunderstanding", false],
+      ["C", "0 m/s and 8 m/s", "careless_attention_slip", false],
+      ["D", "4 m/s and 0 m/s", "procedural_error", false]
+    ]
+  },
+  {
+    "id": "phys_kin_14",
+    "topic": "phys_kinematics_1d",
+    "stem": "Acceleration of a particle starting from rest at x(0)=0 is a(t) = 6t m/s^2. What is its position x(t) at t = 2 s?",
+    "difficulty": 3,
+    "flag": null,
+    "options": [
+      ["A", "8 m", null, true],
+      ["B", "12 m", "formula_misapplication", false],
+      ["C", "24 m", "procedural_error", false],
+      ["D", "16 m", "conceptual_misunderstanding", false]
+    ]
+  },
+  {
+    "id": "phys_kin_15",
+    "topic": "phys_kinematics_2d",
+    "stem": "Rain falls vertically at 4 m/s. A man walks horizontally at 3 m/s. At what angle relative to vertical must he hold his umbrella to block rain?",
+    "difficulty": 2,
+    "flag": null,
+    "options": [
+      ["A", "37 degrees relative to vertical", null, true],
+      ["B", "53 degrees relative to vertical", "visualization_spatial", false],
+      ["C", "45 degrees relative to vertical", "logical_fallacy", false],
+      ["D", "0 degrees (straight up)", "conceptual_misunderstanding", false]
+    ]
+  }
+]

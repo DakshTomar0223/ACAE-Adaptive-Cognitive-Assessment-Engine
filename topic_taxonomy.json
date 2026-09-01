@@ -1,0 +1,95 @@
+{
+  "version": "0.1",
+  "categories": [
+    {
+      "id": "conceptual_misunderstanding",
+      "label": "Conceptual Misunderstanding",
+      "description": "Student's mental model of the underlying concept is wrong, not just misapplied.",
+      "subject_manifestations": {
+        "physics": "Believes force is required to sustain constant velocity",
+        "chemistry": "Confuses oxidation state with formal charge",
+        "math": "Treats a limit as a value the function must reach, not approach"
+      }
+    },
+    {
+      "id": "procedural_error",
+      "label": "Procedural Error",
+      "description": "Concept is understood but the step-by-step execution breaks down.",
+      "subject_manifestations": {
+        "physics": "Correct free-body diagram, wrong integration of resulting ODE",
+        "chemistry": "Correct mechanism identified, arrow-pushing sequence wrong",
+        "math": "Correct setup, algebraic slip in simplification"
+      }
+    },
+    {
+      "id": "visualization_spatial",
+      "label": "Visualization / Spatial Constraint",
+      "description": "Student cannot hold or manipulate the required spatial/geometric mental model.",
+      "subject_manifestations": {
+        "physics": "Misreads vector directions in 2D/3D force diagrams",
+        "chemistry": "Misassigns R/S stereochemistry or ring conformations",
+        "math": "Fails to visualize solids of revolution or 3D coordinate geometry"
+      }
+    },
+    {
+      "id": "logical_fallacy",
+      "label": "Logical Fallacy",
+      "description": "Reasoning chain contains an invalid inference step, independent of content knowledge.",
+      "subject_manifestations": {
+        "physics": "Assumes symmetry that doesn't hold under given constraints",
+        "chemistry": "Overgeneralizes a trend (e.g. periodic trend) outside its valid range",
+        "math": "Affirms the consequent in a proof step"
+      }
+    },
+    {
+      "id": "calculation_speed_deficit",
+      "label": "Calculation Speed Deficit",
+      "description": "Method is correct but too slow under exam time pressure, forcing shortcuts that introduce errors.",
+      "subject_manifestations": {
+        "physics": "Correct approach abandoned mid-way due to time",
+        "chemistry": "Stoichiometry correct but arithmetic rushed and wrong",
+        "math": "Correct differentiation, slow simplification eats remaining time"
+      }
+    },
+    {
+      "id": "conceptual_synthesis_failure",
+      "label": "Conceptual Synthesis Failure",
+      "description": "Individual concepts are known but the student cannot combine them across topics.",
+      "subject_manifestations": {
+        "physics": "Knows kinematics and energy separately, fails to combine for a mixed problem",
+        "chemistry": "Knows thermodynamics and equilibrium separately, fails on combined Le Chatelier + ΔG problems",
+        "math": "Cannot combine coordinate geometry with calculus in one problem"
+      }
+    },
+    {
+      "id": "careless_attention_slip",
+      "label": "Careless / Attention Slip",
+      "description": "Isolated, non-recurring error not reflective of a systematic gap.",
+      "subject_manifestations": {
+        "physics": "Sign error unrelated to conceptual understanding",
+        "chemistry": "Misreads a subscript in a formula",
+        "math": "Copies a number incorrectly between steps"
+      }
+    },
+    {
+      "id": "formula_misapplication",
+      "label": "Formula Misapplication",
+      "description": "Correct formula exists in memory but is applied outside its valid conditions.",
+      "subject_manifestations": {
+        "physics": "Uses constant-acceleration kinematics equations in a variable-acceleration problem",
+        "chemistry": "Applies ideal gas law where real-gas correction is required",
+        "math": "Uses a convergence test outside its applicability conditions"
+      }
+    },
+    {
+      "id": "time_pressure_collapse",
+      "label": "Time-Pressure Collapse",
+      "description": "Performance degrades sharply under simulated exam time constraints vs. untimed conditions.",
+      "subject_manifestations": {
+        "physics": "Correct on practice, incorrect on timed mock for the same topic",
+        "chemistry": "Reaction mechanism questions answered correctly untimed, rushed/wrong timed",
+        "math": "Multi-step problems abandoned or guessed only under time pressure"
+      }
+    }
+  ]
+}

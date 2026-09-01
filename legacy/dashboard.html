@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ACAE — Cognitive Fault Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:        #10152B;
+    --ink-raised: #171D38;
+    --ink-line:   #262E52;
+    --parchment:  #EDE6D6;
+    --parchment-dim: #A9A395;
+    --amber:      #E3A23D;
+    --amber-dim:  #6B551F;
+    --teal:       #4C9490;
+    --teal-dim:   #24413F;
+    --coral:      #C1502E;
+    --coral-dim:  #4A2418;
+    --radius: 3px;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ink);
+    color: var(--parchment);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+  }
+
+  .app { display: grid; grid-template-columns: 200px 1fr 300px; grid-template-rows: auto 1fr; min-height: 100vh; }
+
+  header {
+    grid-column: 1 / -1;
+    display: flex; align-items: baseline; justify-content: space-between;
+    padding: 22px 32px 18px 32px;
+    border-bottom: 1px solid var(--ink-line);
+  }
+  header h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500; font-size: 22px; letter-spacing: 0.01em; margin: 0;
+    font-optical-sizing: auto;
+  }
+  header h1 span { color: var(--amber); }
+  .focus-toggle {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--parchment-dim);
+    cursor: pointer; user-select: none;
+  }
+  .focus-toggle .switch {
+    width: 38px; height: 20px; border-radius: 10px; background: var(--ink-line);
+    position: relative; transition: background 0.25s;
+  }
+  .focus-toggle .switch::after {
+    content: ''; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px;
+    border-radius: 50%; background: var(--parchment-dim); transition: 0.25s;
+  }
+  body.focus-mode .focus-toggle .switch { background: var(--teal-dim); }
+  body.focus-mode .focus-toggle .switch::after { left: 20px; background: var(--teal); }
+
+  nav.subjects {
+    padding: 24px 0; border-right: 1px solid var(--ink-line);
+  }
+  nav.subjects .item {
+    padding: 16px 28px; font-size: 14px; color: var(--parchment-dim);
+    border-left: 3px solid transparent; cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  nav.subjects .item.active {
+    color: var(--parchment); border-left-color: var(--amber);
+    background: rgba(227,162,61,0.06);
+  }
+  nav.subjects .item .count {
+    font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--parchment-dim);
+  }
+
+  main {
+    padding: 36px 40px;
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .map-label {
+    font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--parchment-dim); margin-bottom: 4px;
+  }
+  .map-topic {
+    font-family: 'Fraunces', serif; font-size: 26px; font-weight: 500; margin: 0 0 28px 0;
+  }
+
+  .legend { display: flex; gap: 22px; margin-top: 26px; flex-wrap: wrap; justify-content: center; }
+  .legend .swatch { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--parchment-dim); }
+  .legend .dot { width: 9px; height: 9px; border-radius: 2px; }
+
+  .dominant-callout {
+    margin-top: 28px; padding: 16px 22px; border: 1px solid var(--coral);
+    border-radius: var(--radius); background: rgba(193,80,46,0.08);
+    max-width: 520px; text-align: center;
+  }
+  .dominant-callout .cat {
+    font-family: 'Fraunces', serif; color: var(--coral); font-size: 17px; margin-bottom: 6px;
+  }
+  .dominant-callout .pct {
+    font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--parchment-dim);
+  }
+
+  aside.pathway {
+    border-left: 1px solid var(--ink-line);
+    padding: 28px 26px;
+  }
+  aside.pathway h2 {
+    font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--parchment-dim); margin: 0 0 18px 0; font-weight: 400;
+  }
+  .remedial-note {
+    font-size: 13.5px; line-height: 1.6; color: var(--parchment);
+    padding-bottom: 22px; margin-bottom: 22px; border-bottom: 1px solid var(--ink-line);
+  }
+  .queue-item {
+    padding: 14px 0; border-bottom: 1px solid var(--ink-line);
+    display: flex; gap: 12px; align-items: flex-start;
+  }
+  .queue-item:last-child { border-bottom: none; }
+  .queue-num {
+    font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--amber);
+    width: 18px; flex-shrink: 0; padding-top: 1px;
+  }
+  .queue-stem { font-size: 13px; line-height: 1.5; color: var(--parchment-dim); }
+
+  /* Focus mode: dims chrome, keeps the fault map and remedial note bright,
+     larger touch targets — this is the kiosk/digital-fatigue mode from the brief */
+  body.focus-mode nav.subjects,
+  body.focus-mode header,
+  body.focus-mode .legend { opacity: 0.35; transition: opacity 0.4s; }
+  body.focus-mode .map-topic,
+  body.focus-mode .dominant-callout,
+  body.focus-mode aside.pathway { transition: 0.4s; }
+  body.focus-mode .queue-item { padding: 20px 0; }
+  body.focus-mode .remedial-note { font-size: 15px; }
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1>ACAE <span>/</span> Cognitive Fault Map</h1>
+    <div class="focus-toggle" onclick="document.body.classList.toggle('focus-mode')">
+      <span>Focus Mode</span>
+      <div class="switch"></div>
+    </div>
+  </header>
+
+  <nav class="subjects">
+    <div class="item active">Physics <span class="count">24 attempts</span></div>
+    <div class="item">Chemistry <span class="count">—</span></div>
+    <div class="item">Mathematics <span class="count">—</span></div>
+  </nav>
+
+  <main>
+    <div class="map-label">2D Kinematics &amp; Mechanics</div>
+    <div class="map-topic">Where your reasoning breaks</div>
+
+    <svg id="faultmap" width="420" height="420" viewBox="0 0 420 420"></svg>
+
+    <div class="legend" id="legend"></div>
+
+    <div class="dominant-callout">
+      <div class="cat">Dominant weak point: Visualization / Spatial</div>
+      <div class="pct">95% of wrong answers on this topic trace to this category · confidence gate met (24 attempts)</div>
+    </div>
+  </main>
+
+  <aside class="pathway">
+    <h2>Remedial Pathway</h2>
+    <div class="remedial-note">
+      The trap is in the picture, not the math. Before solving, redraw the diagram and label every vector's direction explicitly — don't reuse a mental image from a similar-looking problem.
+    </div>
+    <h2>Next Up · Targeted</h2>
+    <div class="queue-item">
+      <div class="queue-num">01</div>
+      <div class="queue-stem">A ball is thrown at 30° above horizontal at 20 m/s. Find max height.</div>
+    </div>
+    <div class="queue-item">
+      <div class="queue-num">02</div>
+      <div class="queue-stem">Two vectors A(3,4) and B(4,-3) are added. Find resultant magnitude.</div>
+    </div>
+    <div class="queue-item">
+      <div class="queue-num">03</div>
+      <div class="queue-stem">A projectile's velocity vector at the top of its trajectory points in which direction?</div>
+    </div>
+  </aside>
+</div>
+
+<script>
+const svgNS = "http://www.w3.org/2000/svg";
+const svg = document.getElementById("faultmap");
+const legend = document.getElementById("legend");
+const cx = 210, cy = 210, rOuter = 170, rInner = 108;
+
+function arcPath(startAngle, endAngle, rOut, rIn) {
+  const toXY = (r, a) => [cx + r * Math.cos(a), cy + r * Math.sin(a)];
+  const [x1, y1] = toXY(rOut, startAngle);
+  const [x2, y2] = toXY(rOut, endAngle);
+  const [x3, y3] = toXY(rIn, endAngle);
+  const [x4, y4] = toXY(rIn, startAngle);
+  const large = (endAngle - startAngle) > Math.PI ? 1 : 0;
+  return `M ${x1} ${y1} A ${rOut} ${rOut} 0 ${large} 1 ${x2} ${y2}
+          L ${x3} ${y3} A ${rIn} ${rIn} 0 ${large} 0 ${x4} ${y4} Z`;
+}
+
+function renderDashboard(data) {
+  const { total_attempts, accuracy_pct, chart_data, weak_point_info } = data;
+
+  // 1. Update attempt counter in sidebar
+  const countEl = document.querySelector("nav.subjects .item.active .count");
+  if (countEl) countEl.textContent = `${total_attempts} attempts`;
+
+  // 2. Draw Baseline Track
+  svg.innerHTML = "";
+  const track = document.createElementNS(svgNS, "circle");
+  track.setAttribute("cx", cx); track.setAttribute("cy", cy);
+  track.setAttribute("r", (rOuter + rInner) / 2);
+  track.setAttribute("fill", "none");
+  track.setAttribute("stroke", "#262E52");
+  track.setAttribute("stroke-width", rOuter - rInner);
+  svg.appendChild(track);
+
+  // 3. Render Radial Arc Segments & Legend
+  legend.innerHTML = "";
+  const totalErrorVotes = chart_data.reduce((s, d) => s + d.value, 0);
+
+  if (totalErrorVotes > 0) {
+    let angle = -Math.PI / 2;
+    chart_data.forEach(d => {
+      const sweep = (d.value / totalErrorVotes) * Math.PI * 2 * 0.985;
+      const path = document.createElementNS(svgNS, "path");
+      path.setAttribute("d", arcPath(angle, angle + sweep, rOuter, rInner));
+      path.setAttribute("fill", d.color);
+      svg.appendChild(path);
+      angle += (d.value / totalErrorVotes) * Math.PI * 2;
+
+      const item = document.createElement("div");
+      item.className = "swatch";
+      const pctVal = Math.round((d.value / totalErrorVotes) * 100);
+      item.innerHTML = `<span class="dot" style="background:${d.color}"></span>${d.label} · ${pctVal}%`;
+      legend.appendChild(item);
+    });
+  }
+
+  // 4. Render Center Metrics
+  const centerPct = document.createElementNS(svgNS, "text");
+  centerPct.setAttribute("x", cx); centerPct.setAttribute("y", cy - 6);
+  centerPct.setAttribute("text-anchor", "middle");
+  centerPct.setAttribute("fill", "#EDE6D6");
+  centerPct.setAttribute("font-family", "Fraunces, serif");
+  centerPct.setAttribute("font-size", "42");
+  centerPct.setAttribute("font-weight", "500");
+  centerPct.textContent = `${accuracy_pct}%`;
+  svg.appendChild(centerPct);
+
+  const centerSub = document.createElementNS(svgNS, "text");
+  centerSub.setAttribute("x", cx); centerSub.setAttribute("y", cy + 20);
+  centerSub.setAttribute("text-anchor", "middle");
+  centerSub.setAttribute("fill", "#A9A395");
+  centerSub.setAttribute("font-family", "IBM Plex Mono, monospace");
+  centerSub.setAttribute("font-size", "11");
+  centerSub.textContent = `accuracy, ${total_attempts} attempts`;
+  svg.appendChild(centerSub);
+
+  // 5. Update Dominant Callout
+  const calloutCat = document.querySelector(".dominant-callout .cat");
+  const calloutPct = document.querySelector(".dominant-callout .pct");
+
+  if (weak_point_info.dominant_category) {
+    const formattedCat = weak_point_info.dominant_category.replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+    const sharePct = Math.round((weak_point_info.share_of_errors || 0) * 100);
+    calloutCat.textContent = `Dominant weak point: ${formattedCat}`;
+    calloutPct.textContent = `${sharePct}% of wrong answers on this topic trace to this category · status: ${weak_point_info.status}`;
+  } else {
+    calloutCat.textContent = "Dominant weak point: No Clear Pattern";
+    calloutPct.textContent = weak_point_info.message || "Insufficient categorized data.";
+  }
+
+  // 6. Update Remedial Note
+  const remedialEl = document.querySelector(".remedial-note");
+  if (remedialEl) {
+    remedialEl.textContent = weak_point_info.remedial_note || weak_point_info.message || "No remedial advice currently available.";
+  }
+
+  // 7. Render "Next Up" Queue
+  const pathwayAside = document.querySelector("aside.pathway");
+  const existingQueueItems = pathwayAside.querySelectorAll(".queue-item");
+  existingQueueItems.forEach(el => el.remove());
+
+  const selectedQuestions = weak_point_info.selected_questions || [];
+  if (selectedQuestions.length > 0) {
+    selectedQuestions.forEach((q, idx) => {
+      const qDiv = document.createElement("div");
+      qDiv.className = "queue-item";
+      const numStr = String(idx + 1).padStart(2, "0");
+      qDiv.innerHTML = `
+        <div class="queue-num">${numStr}</div>
+        <div class="queue-stem">${q.stem}</div>
+      `;
+      pathwayAside.appendChild(qDiv);
+    });
+  } else {
+    const emptyDiv = document.createElement("div");
+    emptyDiv.className = "queue-item";
+    emptyDiv.innerHTML = `<div class="queue-stem" style="font-style: italic;">No specific questions queued.</div>`;
+    pathwayAside.appendChild(emptyDiv);
+  }
+}
+
+// Fetch dashboard JSON data
+fetch("dashboard_data.json")
+  .then(res => {
+    if (!res.ok) throw new Error(`HTTP error status: ${res.status}`);
+    return res.json();
+  })
+  .then(data => renderDashboard(data))
+  .catch(err => console.error("Failed to load dashboard data:", err));
+</script>
+</body>
+</html>
