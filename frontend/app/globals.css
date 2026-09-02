@@ -1,0 +1,122 @@
+:root {
+  /* --- base palette ----------------------------------------------------
+     Ink-and-parchment: reads like a page under a desk lamp, not a SaaS
+     dashboard. Kept from the earlier pass — still the right choice for a
+     "calm, focused reading/quiz-taking experience." Every name below is
+     unchanged so page.module.css and results.module.css keep working
+     as-is until their own redesign passes (6F/6G). */
+  --ink: #10152b;
+  --ink-raised: #171d38;
+  --ink-line: #262e52;
+  --parchment: #ede6d6;
+  --parchment-dim: #a9a395;
+  --amber: #e3a23d;
+  --amber-dim: #6b551f;
+  --teal: #4c9490;
+  --teal-dim: #24413f;
+  --coral: #c1502e;
+  --coral-dim: #4a2418;
+  --radius: 3px;
+
+  /* --- semantic aliases --------------------------------------------------
+     Same three hues, named by what they mean rather than what they look
+     like, so a component (like the new header, or answer feedback) can
+     say "this is the correct state" instead of "this is teal." */
+  --color-accent: var(--amber);
+  --color-accent-dim: var(--amber-dim);
+  --color-correct: var(--teal);
+  --color-correct-dim: var(--teal-dim);
+  --color-incorrect: var(--coral);
+  --color-incorrect-dim: var(--coral-dim);
+  --color-warning: var(--amber);
+  --color-warning-dim: var(--amber-dim);
+
+  /* --- type ------------------------------------------------------------- */
+  --font-serif: var(--font-fraunces), Georgia, serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), "SF Mono", monospace;
+
+  /* a type scale — matches the sizes already hand-picked across
+     page.module.css / results.module.css, named so new components (and
+     future redesign passes) pull from one shared scale instead of
+     re-guessing pixel values. */
+  --text-xs: 12px;
+  --text-sm: 13.5px;
+  --text-base: 15px;
+  --text-md: 16px;
+  --text-lg: 19px;
+  --text-xl: 22px;
+  --text-2xl: 26px;
+  --text-3xl: 32px;
+
+  /* --- spacing ------------------------------------------------------------ */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  /* --- layout -------------------------------------------------------------- */
+  --content-width-narrow: 640px; /* quiz page */
+  --content-width-wide: 760px; /* results page */
+
+  /* --- motion --------------------------------------------------------------
+     One shared easing/duration pair so every transition in the app moves
+     the same way, rather than each component inventing its own timing. */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background: var(--ink);
+  color: var(--parchment);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+}
+
+button {
+  font-family: inherit;
+  color: inherit;
+}
+
+input,
+select {
+  font-family: inherit;
+  color: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background: var(--amber-dim);
+  color: var(--parchment);
+}
+
+/* visible keyboard focus everywhere, not just on custom controls */
+:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

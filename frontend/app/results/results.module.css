@@ -1,0 +1,500 @@
+.page {
+  max-width: var(--content-width-wide);
+  margin: 0 auto;
+  padding: var(--space-7) var(--space-5) var(--space-8);
+}
+
+/* --- page intro ------------------------------------------------------------ */
+
+.intro {
+  margin-bottom: var(--space-6);
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: var(--text-2xl);
+  margin: 0;
+  letter-spacing: 0.01em;
+}
+
+.subtitle {
+  margin: var(--space-2) 0 0;
+  max-width: 58ch;
+  color: var(--parchment-dim);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+}
+
+/* --- setup card -------------------------------------------------------------- */
+
+.setupCard {
+  background: var(--ink-raised);
+  border: 1px solid var(--ink-line);
+  border-radius: var(--radius);
+  padding: var(--space-7) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.fieldLabel {
+  font-size: var(--text-sm);
+  color: var(--parchment-dim);
+}
+
+.textInput,
+.select {
+  background: var(--ink);
+  border: 1px solid var(--ink-line);
+  border-radius: var(--radius);
+  padding: var(--space-3) var(--space-3);
+  font-size: var(--text-base);
+  color: var(--parchment);
+  transition: border-color var(--duration-fast) var(--ease-standard);
+}
+
+.textInput:focus,
+.select:focus {
+  border-color: var(--color-accent);
+}
+
+.select:disabled,
+.textInput:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.helperText {
+  font-size: var(--text-xs);
+  color: var(--parchment-dim);
+}
+
+.buttonRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.divider {
+  color: var(--parchment-dim);
+  font-size: var(--text-xs);
+}
+
+/* --- buttons ------------------------------------------------------------------- */
+
+.primaryButton {
+  background: var(--color-accent);
+  color: var(--ink);
+  border: none;
+  border-radius: var(--radius);
+  padding: var(--space-3) var(--space-5);
+  font-size: var(--text-base);
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter var(--duration-fast) var(--ease-standard);
+}
+
+.primaryButton:hover:not(:disabled) {
+  filter: brightness(1.08);
+}
+
+.primaryButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.secondaryButton {
+  background: transparent;
+  color: var(--parchment-dim);
+  border: 1px solid var(--ink-line);
+  border-radius: var(--radius);
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  transition: color var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard);
+}
+
+.secondaryButton:hover:not(:disabled) {
+  color: var(--parchment);
+  border-color: var(--parchment-dim);
+}
+
+.secondaryButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.linkButton {
+  background: transparent;
+  border: none;
+  color: var(--color-accent);
+  font-size: var(--text-xs);
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* --- sample / session banners --------------------------------------------------- */
+
+.sampleBanner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-warning);
+  background: var(--color-warning-dim);
+  border-radius: var(--radius);
+  font-size: var(--text-xs);
+  color: var(--parchment);
+}
+
+.sampleBanner strong {
+  font-weight: 600;
+}
+
+.sessionBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--space-5);
+  border-bottom: 1px solid var(--ink-line);
+}
+
+.sessionInfo {
+  font-size: var(--text-sm);
+  color: var(--parchment-dim);
+}
+
+.sessionInfo strong {
+  color: var(--parchment);
+  font-weight: 500;
+}
+
+/* --- dashboard shell ------------------------------------------------------------- */
+
+.dashboard {
+  animation: rise var(--duration-base) var(--ease-standard);
+}
+
+/* --- stat cards -------------------------------------------------------------------- */
+
+.statRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.statCard {
+  background: var(--ink-raised);
+  border: 1px solid var(--ink-line);
+  border-radius: var(--radius);
+  padding: var(--space-5) var(--space-5);
+}
+
+.statValue {
+  font-family: var(--font-serif);
+  font-size: var(--text-3xl);
+  font-weight: 500;
+  margin: 0 0 var(--space-1);
+}
+
+.statLabel {
+  font-size: var(--text-xs);
+  color: var(--parchment-dim);
+}
+
+/* --- section shell ------------------------------------------------------------------- */
+
+.section {
+  margin-bottom: var(--space-6);
+}
+
+.sectionHeading {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: var(--text-base);
+  color: var(--parchment);
+  margin: 0 0 var(--space-4);
+}
+
+.sectionCard {
+  background: var(--ink-raised);
+  border: 1px solid var(--ink-line);
+  border-radius: var(--radius);
+  padding: var(--space-6) var(--space-6);
+}
+
+/* --- error breakdown bars — a calm horizontal chart, one row per category ------------ */
+
+.barRow {
+  display: grid;
+  grid-template-columns: 150px 1fr 44px;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+}
+
+.barLabel {
+  font-size: var(--text-sm);
+  color: var(--parchment);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.barTrack {
+  height: 8px;
+  background: var(--ink-line);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.barFill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width var(--duration-base) var(--ease-standard);
+}
+
+.barPct {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--parchment-dim);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.emptyState {
+  color: var(--parchment-dim);
+  font-size: var(--text-sm);
+  font-style: italic;
+}
+
+/* --- weak point callout — the page's focal point --------------------------------------
+   Deliberately the largest, most confident card on the page: bigger padding
+   and a bigger heading than any sectionCard, so the diagnosis reads as the
+   headline, with the breakdown chart and remedial pathway as supporting
+   evidence underneath it rather than three equally-weighted boxes. */
+
+.callout {
+  border-radius: var(--radius);
+  border: 1px solid var(--ink-line);
+  padding: var(--space-7) var(--space-6);
+}
+
+.calloutTone {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--parchment-dim);
+  margin-bottom: var(--space-3);
+}
+
+.calloutTone::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ink-line);
+  flex-shrink: 0;
+}
+
+.calloutCat {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: var(--text-2xl);
+  line-height: 1.3;
+  margin: 0 0 var(--space-3);
+  /* always parchment, not the tone color — see the tone rules below for why */
+  color: var(--parchment);
+}
+
+.calloutBody {
+  font-size: var(--text-base);
+  color: var(--parchment-dim);
+  line-height: 1.65;
+  max-width: 58ch;
+  margin: 0;
+}
+
+.toneNeutral {
+  border-color: var(--ink-line);
+}
+
+.toneAmber {
+  border-color: var(--color-warning);
+  background: var(--color-warning-dim);
+}
+.toneAmber .calloutTone::before {
+  background: var(--color-warning);
+}
+
+.toneTeal {
+  border-color: var(--color-correct);
+  background: var(--color-correct-dim);
+}
+.toneTeal .calloutTone::before {
+  background: var(--color-correct);
+}
+
+.toneCoral {
+  border-color: var(--color-incorrect);
+  background: var(--color-incorrect-dim);
+}
+.toneCoral .calloutTone::before {
+  background: var(--color-incorrect);
+}
+
+/* --- remedial note + queue — secondary reading path underneath the callout ------------- */
+
+.remedialNote {
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--parchment);
+  padding-bottom: var(--space-5);
+  margin-bottom: var(--space-5);
+  border-bottom: 1px solid var(--ink-line);
+}
+
+.queueItem {
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--ink-line);
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+}
+
+.queueItem:last-child {
+  border-bottom: none;
+}
+
+.queueNum {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-accent);
+  width: 18px;
+  flex-shrink: 0;
+  padding-top: 1px;
+}
+
+.queueStem {
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  color: var(--parchment-dim);
+}
+
+/* --- status / error cards ------------------------------------------------------------- */
+
+.statusCard {
+  background: var(--ink-raised);
+  border: 1px solid var(--ink-line);
+  border-radius: var(--radius);
+  padding: var(--space-8) var(--space-6);
+  text-align: center;
+  animation: rise var(--duration-base) var(--ease-standard);
+}
+
+.statusHeading {
+  font-family: var(--font-serif);
+  font-size: var(--text-lg);
+  font-weight: 500;
+  margin: 0 0 var(--space-2);
+}
+
+.statusBody {
+  color: var(--parchment-dim);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  margin: 0 0 var(--space-5);
+}
+
+.errorCard {
+  border-color: var(--color-incorrect);
+}
+
+.skeleton {
+  color: var(--parchment-dim);
+  font-size: var(--text-sm);
+  padding: var(--space-8) 0;
+  text-align: center;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- phone width -----------------------------------------------------------
+   Two things break first on a narrow screen: statRow's two equal columns
+   get tight once each stat's serif number wraps, and barRow's fixed 150px
+   label column eats most of the available width, squeezing the actual bar
+   down to almost nothing. Stack both instead of shrinking them further. */
+
+@media (max-width: 600px) {
+  .page {
+    padding: var(--space-6) var(--space-4) var(--space-7);
+  }
+
+  .setupCard,
+  .callout,
+  .sectionCard {
+    padding: var(--space-5) var(--space-4);
+  }
+
+  .statusCard {
+    padding: var(--space-6) var(--space-4);
+  }
+
+  .calloutCat {
+    font-size: var(--text-xl);
+  }
+
+  .statRow {
+    grid-template-columns: 1fr;
+  }
+
+  .barRow {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: var(--space-1);
+    padding: var(--space-3) 0;
+  }
+
+  .barLabel {
+    flex: 1 1 100%;
+    white-space: normal;
+  }
+
+  .barTrack {
+    flex: 1 1 auto;
+  }
+
+  .barPct {
+    flex: 0 0 auto;
+    margin-left: var(--space-2);
+  }
+}

@@ -42,12 +42,12 @@ Below that confidence threshold, it's honest about it instead of guessing
 — it'll say there isn't enough data yet, or that the pattern looks like
 isolated slips rather than something systematic.
 
-**Right now** this result is a static HTML page (`dashboard.html`) built
-from a JSON snapshot you generate with a script (see below). **Planned
-next step** (tracked as Phase 5 in `BLUEPRINT.md`): one Streamlit app that
-serves the quiz *and* the results dashboard together, updating live as
-questions are answered, so there's no separate "take quiz → run export
-script → open HTML file" dance.
+The primary way to see this is the Flask API + Next.js frontend (Phase
+6, see below) — a custom-built quiz and results UI, calling the API live
+as questions are answered. A Streamlit app that does the same thing in
+one process, and the original terminal + static-HTML flow, both still
+work and are kept around as simpler legacy alternatives (see "Legacy /
+scripted alternative" below).
 
 ---
 
@@ -58,19 +58,32 @@ topic_taxonomy.json      the 9 error categories + what they look like per subjec
 schema.sql                the SQLite table definitions
 seed_questions_physics_*.json   the question bank, by topic
 load_questions.py         merges the seed files and loads them into acae.db
-run_quiz.py                terminal quiz — answer questions, log attempts
 cognitive_profiler.py      turns a student's attempt log into a weak-point profile
 weak_point_selector.py     picks the next questions to target that weak point
 remedial_engine.py         category -> explanation + drill sequence
-export_dashboard_data.py   snapshots a student's results to dashboard_data.json
-dashboard.html             the results view (opens dashboard_data.json)
-seed_and_simulate.py       standalone demo: seeds a tiny DB + a synthetic biased student
+seed_and_simulate.py       demo/sample data: seeds a tiny DB + a synthetic biased student
+
+api.py                     Flask REST API (primary backend, Phase 6) — thin JSON
+                            wrapper around the modules above
+frontend/                  Next.js app (primary frontend, Phase 6) — quiz-taking
+                            and results screens, calling api.py via fetch()
+
+app.py                     legacy: Streamlit app — quiz + results in one process
+run_quiz.py                 legacy: terminal quiz — answer questions, log attempts
+export_dashboard_data.py    legacy: snapshots a student's results to dashboard_data.json
+dashboard.html               legacy: the results view (opens dashboard_data.json)
 ```
 
 ## Requirements
 
-- Python 3.9+ (no extra packages needed for the current CLI + static
-  dashboard — everything used is in the standard library)
+- Python 3.9+
+- `flask` and `flask-cors`, for the primary Flask API (`pip install flask
+  flask-cors`) — not needed if you're only using the legacy scripted flow
+  below, since everything there is standard library
+- Node.js 18.18+, for the primary Next.js frontend — not needed for any
+  of the legacy alternatives
+- `streamlit`, only if you're using the legacy Streamlit app
+  (`pip install streamlit`)
 
 ## How to run it
 
@@ -86,37 +99,82 @@ This merges the three topic JSON files into `seed_questions_physics.json`
 and loads everything into `acae.db` (created automatically). Safe to
 re-run any time — it upserts rather than duplicating.
 
-### 2. Run the app
+### 2. Run the Flask API
+
+In its own terminal, from the project root:
 
 ```
-streamlit run app.py
+pip install flask flask-cors
+python api.py
 ```
 
-This opens ACAE in your browser as one live app — no separate "take quiz
-→ run export script → open HTML file" dance. It has two tabs:
+This starts the API at `http://127.0.0.1:5000`. It's a thin JSON wrapper
+around the same `cognitive_profiler.py` / `weak_point_selector.py` /
+`export_dashboard_data.py` / `seed_and_simulate.py` modules the legacy
+scripts below call directly — no diagnostic logic lives in `api.py`
+itself. Leave this terminal running.
 
-- **🧠 Quiz** — pick (or accept a default) student ID and topic in the
-  sidebar and answer questions one at a time, same as `run_quiz.py` below
-  but in the browser.
-- **📊 My Results** — the fault map, dominant weak point, remedial
-  pathway, and next-up question queue described above, rebuilt live from
-  the database on every answer — no manual refresh needed.
+### 3. Run the Next.js frontend
 
-If there are zero attempts yet for the current student/topic, the
-Results tab offers a **"See a sample result"** button — it seeds a
-synthetic biased student into its own `acae_demo.db` (never touching your
-real `acae.db`) so you can see a fully diagnosed result immediately,
-with a clear on-screen label that you're viewing sample data and a
-one-click way back to your real results.
+In a **second** terminal, from the project root:
+
+```
+cd frontend
+npm install
+npm run dev
+```
+
+Open `http://localhost:3000`. This is the primary way to use ACAE — a
+custom quiz-taking screen and a results screen, both talking to the
+Flask API from step 2 via `fetch()`:
+
+- **Quiz** (`/`) — pick a student ID and topic and answer questions one
+  at a time, same mechanics as `run_quiz.py` below but in the browser,
+  with immediate correct/incorrect feedback per question.
+- **Results** (`/results`) — the fault map (wrong answers broken down by
+  category), the dominant weak point call-out once there's enough data
+  to be confident about it, the remedial pathway, and the next-up
+  question queue described above.
+
+Either screen offers a **"See a sample result"** button — it calls
+`POST /api/sample/generate` to seed a synthetic biased student into its
+own `acae_demo.db` (never touching your real `acae.db`), then loads that
+student's results from `GET /api/results/sample`. Sample results are
+clearly labeled on screen, with a one-click way back to your real data.
+
+`frontend/.env.local` points the frontend at the API
+(`NEXT_PUBLIC_API_BASE_URL=http://127.0.0.1:5000` by default) — change it
+if you're running the API somewhere else, then restart `npm run dev`
+(Next.js only reads `.env.local` at startup).
 
 ### Legacy / scripted alternative
 
-The original terminal + static-dashboard flow (`run_quiz.py`,
-`export_dashboard_data.py`, `dashboard.html`) still works and is kept
-around — it's handy for headless testing (no browser involved) or
-scripting against the DB directly. It's no longer the primary way to use
-ACAE; prefer `streamlit run app.py` above unless you specifically need
-this.
+Two older ways to run ACAE still work and are kept around — neither is
+the primary way to use it anymore, but both are handy for headless
+testing, scripting against the DB directly, or if you'd rather run one
+process instead of two.
+
+**Streamlit app** — quiz and results together in one browser tab, no
+separate API/frontend processes:
+
+```
+pip install streamlit
+streamlit run app.py
+```
+
+It has two tabs, mirroring the Flask + Next.js flow above:
+
+- **🧠 Quiz** — pick (or accept a default) student ID and topic in the
+  sidebar and answer questions one at a time.
+- **📊 My Results** — the same fault map, dominant weak point, remedial
+  pathway, and next-up question queue, rebuilt live from the database on
+  every answer.
+
+It has its own **"See a sample result"** button on the Results tab, using
+the same `acae_demo.db` mechanism described above.
+
+**Terminal + static-dashboard flow** — no browser needed until the very
+last step, or script against the DB directly:
 
 **Take a quiz:**
 
@@ -200,6 +258,9 @@ Python) is what the scripts actually use.
 | `FileNotFoundError` | Wrong folder, or a file hasn't been created yet | Confirm you're in the project folder; run `python load_questions.py` first if `acae.db` doesn't exist yet |
 | `sqlite3.OperationalError: database is locked` | Two scripts tried to use `acae.db` at the same time | Close any other window/script touching `acae.db`, then retry |
 | Dashboard shows "No attempts logged for this topic yet" | You haven't run `run_quiz.py` for that student/topic (or haven't hit the confidence threshold) | Answer more questions, or use `seed_and_simulate.py` for an instant example |
+| Frontend shows "Couldn't reach the API at http://127.0.0.1:5000" | `python api.py` isn't running, or it's running on a different port than `frontend/.env.local` expects | Start `python api.py` in its own terminal first; confirm the two match |
+| CORS error in the browser console | Rare — `flask-cors` didn't load | Confirm `pip install flask-cors` succeeded; `api.py` already calls `CORS(app)` |
+| `npm run dev` fails immediately | Dependencies not installed, or Node too old | Run `npm install` inside `frontend/`; confirm Node 18.18+ with `node --version` |
 
 ## Caveats worth knowing before presenting this
 
@@ -213,3 +274,8 @@ See `BLUEPRINT.md` §8 for the full list — the short version:
 - Two of the nine error categories (time-pressure collapse, calculation
   speed deficit) are detected from timing data, not from which wrong
   option a student picks.
+- The Flask + Next.js split is new surface area, not new intelligence —
+  none of the diagnostic logic in `cognitive_profiler.py` /
+  `weak_point_selector.py` / `remedial_engine.py` changed to build it.
+  The added risk is plumbing: two dev servers to keep running instead of
+  one, and the API/frontend JSON contract drifting out of sync.

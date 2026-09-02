@@ -1,0 +1,362 @@
+.page {
+  max-width: var(--content-width-narrow);
+  margin: 0 auto;
+  padding: var(--space-7) var(--space-5) var(--space-8);
+}
+
+/* --- page intro --------------------------------------------------------- */
+
+.intro {
+  margin-bottom: var(--space-6);
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: var(--text-2xl);
+  margin: 0;
+  letter-spacing: 0.01em;
+}
+
+.subtitle {
+  margin: var(--space-2) 0 0;
+  max-width: 46ch;
+  color: var(--parchment-dim);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+}
+
+/* --- setup card ---------------------------------------------------------- */
+
+.setupCard {
+  background: var(--ink-raised);
+  border: 1px solid var(--ink-line);
+  border-radius: var(--radius);
+  padding: var(--space-7) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.fieldLabel {
+  font-size: var(--text-sm);
+  color: var(--parchment-dim);
+}
+
+.textInput,
+.select {
+  background: var(--ink);
+  border: 1px solid var(--ink-line);
+  border-radius: var(--radius);
+  padding: var(--space-3) var(--space-3);
+  font-size: var(--text-base);
+  color: var(--parchment);
+  transition: border-color var(--duration-fast) var(--ease-standard);
+}
+
+.textInput:focus,
+.select:focus {
+  border-color: var(--color-accent);
+}
+
+.select:disabled,
+.textInput:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.helperText {
+  font-size: var(--text-xs);
+  color: var(--parchment-dim);
+}
+
+/* --- buttons --------------------------------------------------------------- */
+
+.primaryButton {
+  background: var(--color-accent);
+  color: var(--ink);
+  border: none;
+  border-radius: var(--radius);
+  padding: var(--space-3) var(--space-5);
+  font-size: var(--text-base);
+  font-weight: 600;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: filter var(--duration-fast) var(--ease-standard);
+}
+
+.primaryButton:hover:not(:disabled) {
+  filter: brightness(1.08);
+}
+
+.primaryButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.secondaryButton {
+  background: transparent;
+  color: var(--parchment-dim);
+  border: 1px solid var(--ink-line);
+  border-radius: var(--radius);
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  transition: color var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard);
+}
+
+.secondaryButton:hover {
+  color: var(--parchment);
+  border-color: var(--parchment-dim);
+}
+
+/* --- active session bar --------------------------------------------------- */
+
+.sessionBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--space-5);
+  border-bottom: 1px solid var(--ink-line);
+}
+
+.sessionInfo {
+  font-size: var(--text-sm);
+  color: var(--parchment-dim);
+}
+
+.sessionInfo strong {
+  color: var(--parchment);
+  font-weight: 500;
+}
+
+/* --- question card ---------------------------------------------------------
+   Same card language as setupCard/statusCard, so every phase of the quiz
+   reads as "one calm focal point on the page" rather than three different
+   layouts. Options sit on --ink inside it, mirroring how inputs sit on
+   --ink inside the setup card. */
+
+.questionCard {
+  background: var(--ink-raised);
+  border: 1px solid var(--ink-line);
+  border-radius: var(--radius);
+  padding: var(--space-7) var(--space-6);
+  animation: rise var(--duration-base) var(--ease-standard);
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  row-gap: var(--space-2);
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--parchment-dim);
+}
+
+.metaTag {
+  border: 1px solid var(--ink-line);
+  border-radius: var(--radius);
+  padding: 3px var(--space-2);
+}
+
+.timer {
+  margin-left: auto;
+  color: var(--parchment-dim);
+  font-variant-numeric: tabular-nums;
+}
+
+.stem {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: var(--text-xl);
+  line-height: 1.45;
+  margin: 0 0 var(--space-6);
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.optionButton {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  width: 100%;
+  text-align: left;
+  background: var(--ink);
+  border: 1px solid var(--ink-line);
+  border-radius: var(--radius);
+  padding: var(--space-4) var(--space-4);
+  font-size: var(--text-base);
+  cursor: pointer;
+  transition: border-color var(--duration-fast) var(--ease-standard),
+    background var(--duration-fast) var(--ease-standard);
+}
+
+.optionButton:hover:not(:disabled) {
+  border-color: var(--color-accent);
+}
+
+.optionButton:disabled {
+  cursor: default;
+}
+
+.optionButtonSelected {
+  border-color: var(--color-accent);
+}
+
+.optionButtonCorrect {
+  border-color: var(--color-correct);
+  background: var(--color-correct-dim);
+}
+
+.optionButtonIncorrect {
+  border-color: var(--color-incorrect);
+  background: var(--color-incorrect-dim);
+}
+
+.optionButtonMuted {
+  opacity: 0.45;
+}
+
+.optionLetter {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-accent);
+  width: 18px;
+  flex-shrink: 0;
+}
+
+.optionText {
+  flex: 1;
+  line-height: 1.5;
+}
+
+.optionMark {
+  font-size: var(--text-base);
+  flex-shrink: 0;
+}
+
+/* visually hidden but announced by screen readers — the ✓/✕ glyphs above
+   are aria-hidden, this is the actual accessible label for the state, so
+   "correct" / "incorrect" never depends on color or glyph alone. */
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --- feedback + status ------------------------------------------------------ */
+
+.feedbackBanner {
+  margin-top: var(--space-5);
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  font-size: var(--text-base);
+  animation: rise var(--duration-base) var(--ease-standard);
+}
+
+.feedbackCorrect {
+  border: 1px solid var(--color-correct);
+  background: var(--color-correct-dim);
+}
+
+.feedbackIncorrect {
+  border: 1px solid var(--color-incorrect);
+  background: var(--color-incorrect-dim);
+}
+
+.statusCard {
+  background: var(--ink-raised);
+  border: 1px solid var(--ink-line);
+  border-radius: var(--radius);
+  padding: var(--space-8) var(--space-6);
+  text-align: center;
+  animation: rise var(--duration-base) var(--ease-standard);
+}
+
+.statusHeading {
+  font-family: var(--font-serif);
+  font-size: var(--text-lg);
+  font-weight: 500;
+  margin: 0 0 var(--space-2);
+}
+
+.statusBody {
+  color: var(--parchment-dim);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  margin: 0 0 var(--space-5);
+}
+
+.errorCard {
+  border-color: var(--color-incorrect);
+}
+
+.skeleton {
+  color: var(--parchment-dim);
+  font-size: var(--text-sm);
+  padding: var(--space-8) 0;
+  text-align: center;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- phone width -------------------------------------------------------- */
+
+@media (max-width: 600px) {
+  .page {
+    padding: var(--space-6) var(--space-4) var(--space-7);
+  }
+
+  .setupCard,
+  .questionCard {
+    padding: var(--space-5) var(--space-4);
+  }
+
+  .statusCard {
+    padding: var(--space-6) var(--space-4);
+  }
+
+  .stem {
+    font-size: var(--text-lg);
+  }
+}
