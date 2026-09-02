@@ -1,0 +1,25 @@
+.toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  background: transparent;
+  border: 1px solid var(--ink-line);
+  border-radius: var(--radius);
+  color: var(--parchment-dim);
+  cursor: pointer;
+  transition: color var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard);
+}
+
+.toggle:hover {
+  color: var(--amber);
+  border-color: var(--amber);
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+}

@@ -1,0 +1,444 @@
+﻿{
+    "name":  "jee-neet-practice",
+    "type":  "directory",
+    "children":  [
+                     {
+                         "name":  "backend",
+                         "type":  "directory",
+                         "children":  [
+                                          {
+                                              "name":  "__pycache__",
+                                              "type":  "directory",
+                                              "children":  [
+                                                               {
+                                                                   "name":  "cognitive_profiler.cpython-314.pyc",
+                                                                   "type":  "file",
+                                                                   "size":  11374,
+                                                                   "extension":  ".pyc"
+                                                               },
+                                                               {
+                                                                   "name":  "db_helpers.cpython-314.pyc",
+                                                                   "type":  "file",
+                                                                   "size":  5969,
+                                                                   "extension":  ".pyc"
+                                                               },
+                                                               {
+                                                                   "name":  "export_dashboard_data.cpython-314.pyc",
+                                                                   "type":  "file",
+                                                                   "size":  5077,
+                                                                   "extension":  ".pyc"
+                                                               },
+                                                               {
+                                                                   "name":  "remedial_engine.cpython-314.pyc",
+                                                                   "type":  "file",
+                                                                   "size":  6830,
+                                                                   "extension":  ".pyc"
+                                                               },
+                                                               {
+                                                                   "name":  "seed_and_simulate.cpython-314.pyc",
+                                                                   "type":  "file",
+                                                                   "size":  7339,
+                                                                   "extension":  ".pyc"
+                                                               },
+                                                               {
+                                                                   "name":  "weak_point_selector.cpython-314.pyc",
+                                                                   "type":  "file",
+                                                                   "size":  7805,
+                                                                   "extension":  ".pyc"
+                                                               }
+                                                           ]
+                                          },
+                                          {
+                                              "name":  "acae.db",
+                                              "type":  "file",
+                                              "size":  131072,
+                                              "extension":  ".db"
+                                          },
+                                          {
+                                              "name":  "acae_demo.db",
+                                              "type":  "file",
+                                              "size":  61440,
+                                              "extension":  ".db"
+                                          },
+                                          {
+                                              "name":  "api.py",
+                                              "type":  "file",
+                                              "size":  7686,
+                                              "extension":  ".py"
+                                          },
+                                          {
+                                              "name":  "app.py",
+                                              "type":  "file",
+                                              "size":  15872,
+                                              "extension":  ".py"
+                                          },
+                                          {
+                                              "name":  "cognitive_profiler.py",
+                                              "type":  "file",
+                                              "size":  7221,
+                                              "extension":  ".py"
+                                          },
+                                          {
+                                              "name":  "db_helpers.py",
+                                              "type":  "file",
+                                              "size":  3435,
+                                              "extension":  ".py"
+                                          },
+                                          {
+                                              "name":  "export_dashboard_data.py",
+                                              "type":  "file",
+                                              "size":  4337,
+                                              "extension":  ".py"
+                                          },
+                                          {
+                                              "name":  "load_questions.py",
+                                              "type":  "file",
+                                              "size":  5779,
+                                              "extension":  ".py"
+                                          },
+                                          {
+                                              "name":  "remedial_engine.py",
+                                              "type":  "file",
+                                              "size":  7608,
+                                              "extension":  ".py"
+                                          },
+                                          {
+                                              "name":  "requirements.txt",
+                                              "type":  "file",
+                                              "size":  27,
+                                              "extension":  ".txt"
+                                          },
+                                          {
+                                              "name":  "seed_and_simulate.py",
+                                              "type":  "file",
+                                              "size":  7209,
+                                              "extension":  ".py"
+                                          },
+                                          {
+                                              "name":  "seed_questions_physics.json",
+                                              "type":  "file",
+                                              "size":  33507,
+                                              "extension":  ".json"
+                                          },
+                                          {
+                                              "name":  "weak_point_selector.py",
+                                              "type":  "file",
+                                              "size":  6226,
+                                              "extension":  ".py"
+                                          }
+                                      ]
+                     },
+                     {
+                         "name":  "frontend",
+                         "type":  "directory",
+                         "children":  [
+                                          {
+                                              "name":  "app",
+                                              "type":  "directory",
+                                              "children":  [
+                                                               {
+                                                                   "name":  "components",
+                                                                   "type":  "directory",
+                                                                   "children":  [
+                                                                                    {
+                                                                                        "name":  "Header.module.css",
+                                                                                        "type":  "file",
+                                                                                        "size":  1494,
+                                                                                        "extension":  ".css"
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "Header.tsx",
+                                                                                        "type":  "file",
+                                                                                        "size":  1759,
+                                                                                        "extension":  ".tsx"
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "ThemeToggle.module.css",
+                                                                                        "type":  "file",
+                                                                                        "size":  534,
+                                                                                        "extension":  ".css"
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "ThemeToggle.tsx",
+                                                                                        "type":  "file",
+                                                                                        "size":  3215,
+                                                                                        "extension":  ".tsx"
+                                                                                    }
+                                                                                ]
+                                                               },
+                                                               {
+                                                                   "name":  "results",
+                                                                   "type":  "directory",
+                                                                   "children":  [
+                                                                                    {
+                                                                                        "name":  "page.tsx",
+                                                                                        "type":  "file",
+                                                                                        "size":  15593,
+                                                                                        "extension":  ".tsx"
+                                                                                    },
+                                                                                    {
+                                                                                        "name":  "results.module.css",
+                                                                                        "type":  "file",
+                                                                                        "size":  12298,
+                                                                                        "extension":  ".css"
+                                                                                    }
+                                                                                ]
+                                                               },
+                                                               {
+                                                                   "name":  "globals.css",
+                                                                   "type":  "file",
+                                                                   "size":  5562,
+                                                                   "extension":  ".css"
+                                                               },
+                                                               {
+                                                                   "name":  "icon.svg",
+                                                                   "type":  "file",
+                                                                   "size":  8514,
+                                                                   "extension":  ".svg"
+                                                               },
+                                                               {
+                                                                   "name":  "layout.tsx",
+                                                                   "type":  "file",
+                                                                   "size":  1825,
+                                                                   "extension":  ".tsx"
+                                                               },
+                                                               {
+                                                                   "name":  "page.module.css",
+                                                                   "type":  "file",
+                                                                   "size":  10175,
+                                                                   "extension":  ".css"
+                                                               },
+                                                               {
+                                                                   "name":  "page.tsx",
+                                                                   "type":  "file",
+                                                                   "size":  14811,
+                                                                   "extension":  ".tsx"
+                                                               }
+                                                           ]
+                                          },
+                                          {
+                                              "name":  "lib",
+                                              "type":  "directory",
+                                              "children":  [
+                                                               {
+                                                                   "name":  "api.ts",
+                                                                   "type":  "file",
+                                                                   "size":  5009,
+                                                                   "extension":  ".ts"
+                                                               }
+                                                           ]
+                                          },
+                                          {
+                                              "name":  "public",
+                                              "type":  "directory",
+                                              "children":  [
+                                                               {
+                                                                   "name":  "file.svg",
+                                                                   "type":  "file",
+                                                                   "size":  391,
+                                                                   "extension":  ".svg"
+                                                               },
+                                                               {
+                                                                   "name":  "globe.svg",
+                                                                   "type":  "file",
+                                                                   "size":  1035,
+                                                                   "extension":  ".svg"
+                                                               },
+                                                               {
+                                                                   "name":  "next.svg",
+                                                                   "type":  "file",
+                                                                   "size":  1375,
+                                                                   "extension":  ".svg"
+                                                               },
+                                                               {
+                                                                   "name":  "vercel.svg",
+                                                                   "type":  "file",
+                                                                   "size":  128,
+                                                                   "extension":  ".svg"
+                                                               },
+                                                               {
+                                                                   "name":  "window.svg",
+                                                                   "type":  "file",
+                                                                   "size":  385,
+                                                                   "extension":  ".svg"
+                                                               }
+                                                           ]
+                                          },
+                                          {
+                                              "name":  ".env.local",
+                                              "type":  "file",
+                                              "size":  47,
+                                              "extension":  ".local"
+                                          },
+                                          {
+                                              "name":  ".gitignore",
+                                              "type":  "file",
+                                              "size":  88,
+                                              "extension":  ".gitignore"
+                                          },
+                                          {
+                                              "name":  "AGENTS.md",
+                                              "type":  "file",
+                                              "size":  678,
+                                              "extension":  ".md"
+                                          },
+                                          {
+                                              "name":  "CLAUDE.md",
+                                              "type":  "file",
+                                              "size":  11,
+                                              "extension":  ".md"
+                                          },
+                                          {
+                                              "name":  "eslint.config.mjs",
+                                              "type":  "file",
+                                              "size":  465,
+                                              "extension":  ".mjs"
+                                          },
+                                          {
+                                              "name":  "next-env.d.ts",
+                                              "type":  "file",
+                                              "size":  296,
+                                              "extension":  ".ts"
+                                          },
+                                          {
+                                              "name":  "next.config.js",
+                                              "type":  "file",
+                                              "size":  94,
+                                              "extension":  ".js"
+                                          },
+                                          {
+                                              "name":  "next.config.ts",
+                                              "type":  "file",
+                                              "size":  133,
+                                              "extension":  ".ts"
+                                          },
+                                          {
+                                              "name":  "package-lock.json",
+                                              "type":  "file",
+                                              "size":  236714,
+                                              "extension":  ".json"
+                                          },
+                                          {
+                                              "name":  "package.json",
+                                              "type":  "file",
+                                              "size":  443,
+                                              "extension":  ".json"
+                                          },
+                                          {
+                                              "name":  "postcss.config.mjs",
+                                              "type":  "file",
+                                              "size":  94,
+                                              "extension":  ".mjs"
+                                          },
+                                          {
+                                              "name":  "README.md",
+                                              "type":  "file",
+                                              "size":  5602,
+                                              "extension":  ".md"
+                                          },
+                                          {
+                                              "name":  "tsconfig.json",
+                                              "type":  "file",
+                                              "size":  699,
+                                              "extension":  ".json"
+                                          }
+                                      ]
+                     },
+                     {
+                         "name":  "legacy",
+                         "type":  "directory",
+                         "children":  [
+                                          {
+                                              "name":  "app.py",
+                                              "type":  "file",
+                                              "size":  18641,
+                                              "extension":  ".py"
+                                          },
+                                          {
+                                              "name":  "dashboard.html",
+                                              "type":  "file",
+                                              "size":  12772,
+                                              "extension":  ".html"
+                                          },
+                                          {
+                                              "name":  "dashboard_data.json",
+                                              "type":  "file",
+                                              "size":  304,
+                                              "extension":  ".json"
+                                          },
+                                          {
+                                              "name":  "export_dashboard_data.py",
+                                              "type":  "file",
+                                              "size":  3891,
+                                              "extension":  ".py"
+                                          },
+                                          {
+                                              "name":  "run_quiz.py",
+                                              "type":  "file",
+                                              "size":  6794,
+                                              "extension":  ".py"
+                                          }
+                                      ]
+                     },
+                     {
+                         "name":  ".gitignore",
+                         "type":  "file",
+                         "size":  54,
+                         "extension":  ".gitignore"
+                     },
+                     {
+                         "name":  "BLUEPRINT.md",
+                         "type":  "file",
+                         "size":  28225,
+                         "extension":  ".md"
+                     },
+                     {
+                         "name":  "project-structure.json",
+                         "type":  "file",
+                         "size":  27183,
+                         "extension":  ".json"
+                     },
+                     {
+                         "name":  "README.md",
+                         "type":  "file",
+                         "size":  12419,
+                         "extension":  ".md"
+                     },
+                     {
+                         "name":  "schema.sql",
+                         "type":  "file",
+                         "size":  2077,
+                         "extension":  ".sql"
+                     },
+                     {
+                         "name":  "seed_questions_physics.json",
+                         "type":  "file",
+                         "size":  33507,
+                         "extension":  ".json"
+                     },
+                     {
+                         "name":  "seed_questions_physics_energy.json",
+                         "type":  "file",
+                         "size":  7958,
+                         "extension":  ".json"
+                     },
+                     {
+                         "name":  "seed_questions_physics_kinematics.json",
+                         "type":  "file",
+                         "size":  8229,
+                         "extension":  ".json"
+                     },
+                     {
+                         "name":  "seed_questions_physics_mechanics.json",
+                         "type":  "file",
+                         "size":  8638,
+                         "extension":  ".json"
+                     },
+                     {
+                         "name":  "topic_taxonomy.json",
+                         "type":  "file",
+                         "size":  4393,
+                         "extension":  ".json"
+                     }
+                 ]
+}

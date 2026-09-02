@@ -72,6 +72,8 @@ app.py                     legacy: Streamlit app — quiz + results in one proce
 run_quiz.py                 legacy: terminal quiz — answer questions, log attempts
 export_dashboard_data.py    legacy: snapshots a student's results to dashboard_data.json
 dashboard.html               legacy: the results view (opens dashboard_data.json)
+
+start-dev.ps1               launches api.py + frontend's `npm run dev` in one command
 ```
 
 ## Requirements
@@ -88,6 +90,24 @@ dashboard.html               legacy: the results view (opens dashboard_data.json
 ## How to run it
 
 All commands below assume you're in this project folder in a terminal.
+
+### Quickest path: one script (Windows / PowerShell)
+
+Once the database is built (step 1 below), `./start-dev.bat` launches
+both the Flask API and the Next.js frontend for you — each in its own
+window — instead of opening two terminals and `cd`-ing into `frontend`
+by hand:
+
+```
+./start-dev
+```
+
+Add `-NoNewWindows` to run both as background jobs in the current window
+(both logs stream inline) instead of opening separate windows. Closing a
+window, or `Ctrl+C` inside it, stops that process only.
+
+The manual two-terminal steps below still work exactly the same if you'd
+rather run them yourself or aren't on PowerShell.
 
 ### 1. Build the question database
 
@@ -261,6 +281,15 @@ Python) is what the scripts actually use.
 | Frontend shows "Couldn't reach the API at http://127.0.0.1:5000" | `python api.py` isn't running, or it's running on a different port than `frontend/.env.local` expects | Start `python api.py` in its own terminal first; confirm the two match |
 | CORS error in the browser console | Rare — `flask-cors` didn't load | Confirm `pip install flask-cors` succeeded; `api.py` already calls `CORS(app)` |
 | `npm run dev` fails immediately | Dependencies not installed, or Node too old | Run `npm install` inside `frontend/`; confirm Node 18.18+ with `node --version` |
+
+## Known frontend issues (being fixed — see BLUEPRINT.md §11.3, 6H)
+
+The Next.js UI's visual redesign is functional but not finished:
+typography doesn't read as modern/elegant yet, some text/background
+pairings fall short of good contrast, and the topic/student `<select>`
+dropdown doesn't restyle with the theme — it's still visibly the
+browser's default control, hard to read in dark mode. No diagnostic
+logic is affected by any of this.
 
 ## Caveats worth knowing before presenting this
 

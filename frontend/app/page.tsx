@@ -181,10 +181,10 @@ export default function QuizPage() {
           <div className={styles.sessionInfo}>
             <strong>{studentId}</strong> · {topicId}
             {sessionAttempted > 0 && (
-              <>
+              <span className={styles.sessionScore}>
                 {" "}
                 — {sessionCorrect}/{sessionAttempted} correct this session
-              </>
+              </span>
             )}
           </div>
           <button className={styles.secondaryButton} onClick={handleChangeSession}>
@@ -250,7 +250,10 @@ export default function QuizPage() {
               role="status"
               aria-live="polite"
             >
-              <span>{feedback.is_correct ? "Correct!" : "Not quite."}</span>
+              <span className={styles.feedbackVerdict}>
+                <span className={styles.feedbackDot} aria-hidden="true" />
+                {feedback.is_correct ? "Correct" : "Not quite"}
+              </span>
               <button className={styles.primaryButton} onClick={handleNext}>
                 Next question
               </button>
@@ -261,6 +264,7 @@ export default function QuizPage() {
 
       {phase === "done" && (
         <div className={styles.statusCard}>
+          <DoneMark />
           <h2 className={styles.statusHeading}>No more questions</h2>
           <p className={styles.statusBody}>
             {studentId} has answered every available question in {topicId} for now.
@@ -273,6 +277,7 @@ export default function QuizPage() {
 
       {phase === "error" && (
         <div className={`${styles.statusCard} ${styles.errorCard}`} role="alert">
+          <ErrorMark />
           <h2 className={styles.statusHeading}>Something went wrong</h2>
           <p className={styles.statusBody}>{errorMessage}</p>
           <button className={styles.primaryButton} onClick={handleRetry}>
@@ -388,7 +393,7 @@ function OptionButton({
   state: OptionState;
   onClick: () => void;
 }) {
-  const stateClass =
+  const rowClass =
     state === "selected"
       ? styles.optionButtonSelected
       : state === "correct"
@@ -399,27 +404,88 @@ function OptionButton({
       ? styles.optionButtonMuted
       : "";
 
+  const markClass =
+    state === "selected"
+      ? styles.markSelected
+      : state === "correct"
+      ? styles.markCorrect
+      : state === "incorrect"
+      ? styles.markIncorrect
+      : "";
+
   return (
     <button
       type="button"
-      className={`${styles.optionButton} ${stateClass}`}
+      className={`${styles.optionButton} ${rowClass}`}
       disabled={disabled}
       onClick={onClick}
     >
-      <span className={styles.optionLetter}>{letter}</span>
+      <span className={`${styles.mark} ${markClass}`} aria-hidden="true">
+        {state === "correct" ? (
+          <CheckIcon />
+        ) : state === "incorrect" ? (
+          <CrossIcon />
+        ) : (
+          letter
+        )}
+      </span>
       <span className={styles.optionText}>{text}</span>
-      {state === "correct" && (
-        <span className={styles.optionMark} aria-hidden="true">
-          ✓
-        </span>
-      )}
-      {state === "incorrect" && (
-        <span className={styles.optionMark} aria-hidden="true">
-          ✕
-        </span>
-      )}
       {state === "correct" && <span className={styles.srOnly}>Correct answer</span>}
       {state === "incorrect" && <span className={styles.srOnly}>Your answer — incorrect</span>}
     </button>
+  );
+}
+
+// --- small marks, drawn in the same thin-stroke language as the header logo ---
+
+function CheckIcon() {
+  return (
+    <svg className={styles.markIcon} viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path
+        d="M3.5 8.5 6.5 11.5 12.5 4.5"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function CrossIcon() {
+  return (
+    <svg className={styles.markIcon} viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path
+        d="M4 4l8 8M12 4l-8 8"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function DoneMark() {
+  return (
+    <svg className={styles.statusMark} viewBox="0 0 40 40" fill="none" aria-hidden="true">
+      <circle cx="20" cy="20" r="15" stroke="currentColor" strokeWidth="1.4" />
+      <path
+        d="M13.5 20.5 18 25 27 15"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function ErrorMark() {
+  return (
+    <svg className={styles.statusMark} viewBox="0 0 40 40" fill="none" aria-hidden="true">
+      <circle cx="20" cy="20" r="15" stroke="currentColor" strokeWidth="1.4" />
+      <path d="M20 13v10" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+      <circle cx="20" cy="27.5" r="1.1" fill="currentColor" />
+    </svg>
   );
 }

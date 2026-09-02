@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Fraunces, Inter, IBM_Plex_Mono } from "next/font/google";
 import Header from "./components/Header";
+import { themeInitScript } from "./components/ThemeToggle";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -36,10 +37,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body
-        className={`${fraunces.variable} ${inter.variable} ${plexMono.variable}`}
-      >
+    // suppressHydrationWarning: the inline script below sets data-theme
+    // on this element before React hydrates, on purpose — without this,
+    // React would flag the server/client mismatch as an error.
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Blocking (non-async) so it runs before first paint — this is
+            what prevents a flash of the wrong theme on load. Reads the
+            saved choice from localStorage, falling back to the OS
+            preference the very first time the app is opened. */}
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
+      <body className={`${fraunces.variable} ${inter.variable} ${plexMono.variable}`}>
         <Header />
         <main>{children}</main>
       </body>

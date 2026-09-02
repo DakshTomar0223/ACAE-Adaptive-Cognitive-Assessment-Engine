@@ -16,19 +16,23 @@ import {
 
 type Phase = "setup" | "loading" | "loaded" | "error";
 
-// Fallback categorical palette for chart_data entries that don't carry
+// Fallback categorical classes for chart_data entries that don't carry
 // their own `color` — 9 slots to match the taxonomy's 9 error categories.
-const PALETTE = [
-  "#E3A23D", // amber
-  "#4C9490", // teal
-  "#C1502E", // coral
-  "#8C6FB0", // violet
-  "#6E9B6A", // sage
-  "#5B84B0", // slate blue
-  "#C97A9A", // rose
-  "#9B9153", // olive
-  "#4A7A8C", // deep teal-blue
-];
+// Defined in results.module.css as theme-aware CSS custom properties
+// (cat0/cat1/cat2 reuse the app's accent/correct/incorrect tokens; the
+// rest have their own light/dark pair) rather than fixed hex, so the
+// chart doesn't wash out or misread when the theme switches.
+const PALETTE_CLASSES = [
+  "cat0",
+  "cat1",
+  "cat2",
+  "cat3",
+  "cat4",
+  "cat5",
+  "cat6",
+  "cat7",
+  "cat8",
+] as const;
 
 // Copy + visual tone per confidence-gate status. Each status gets its own
 // honest framing rather than being squashed into one generic message —
@@ -390,16 +394,33 @@ function ErrorBreakdown({ chartData }: { chartData: ChartDatum[] }) {
     <div>
       {sorted.map((d, i) => {
         const pct = Math.round((d.value / total) * 100);
-        const color = d.color ?? PALETTE[i % PALETTE.length];
+        const explicitColor = d.color;
+        const fallbackClass =
+          styles[PALETTE_CLASSES[i % PALETTE_CLASSES.length]];
+        const swatchStyle = explicitColor
+          ? { background: explicitColor }
+          : undefined;
+        const fillStyle = explicitColor
+          ? { width: `${pct}%`, background: explicitColor }
+          : { width: `${pct}%` };
         return (
           <div className={styles.barRow} key={d.category ?? d.label}>
             <div className={styles.barLabel} title={d.label}>
-              {d.label}
+              <span
+                className={`${styles.barSwatch} ${
+                  explicitColor ? "" : fallbackClass
+                }`}
+                style={swatchStyle}
+                aria-hidden="true"
+              />
+              <span className={styles.barLabelText}>{d.label}</span>
             </div>
             <div className={styles.barTrack}>
               <div
-                className={styles.barFill}
-                style={{ width: `${pct}%`, background: color }}
+                className={`${styles.barFill} ${
+                  explicitColor ? "" : fallbackClass
+                }`}
+                style={fillStyle}
               />
             </div>
             <div className={styles.barPct}>{pct}%</div>

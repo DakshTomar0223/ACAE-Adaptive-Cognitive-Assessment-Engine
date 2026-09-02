@@ -1,3 +1,59 @@
+/* --- error-category palette --------------------------------------------
+   The taxonomy has 9 error categories. The first 3 slots reuse the app's
+   existing accent/correct/incorrect tokens so the chart stays consistent
+   with the callout tones elsewhere on the page. The remaining 6 need
+   their own colors, and — like every other token in this system — those
+   colors change between themes rather than staying fixed: the light-theme
+   values are darkened/more saturated versions of the dark-theme ones,
+   the same relationship --amber, --teal and --coral already have, so a
+   bar fill reads at the same rough contrast against its track in both
+   themes instead of washing out in light mode. */
+:global([data-theme="dark"]) {
+  --cat-violet: #8c6fb0;
+  --cat-sage: #6e9b6a;
+  --cat-slate: #5b84b0;
+  --cat-rose: #c97a9a;
+  --cat-olive: #9b9153;
+  --cat-deep-teal: #4a7a8c;
+}
+
+:global([data-theme="light"]) {
+  --cat-violet: #5d3e8a;
+  --cat-sage: #4c7a48;
+  --cat-slate: #3d6390;
+  --cat-rose: #a34f74;
+  --cat-olive: #7a7233;
+  --cat-deep-teal: #305d6e;
+}
+
+.cat0 {
+  background: var(--color-accent);
+}
+.cat1 {
+  background: var(--color-correct);
+}
+.cat2 {
+  background: var(--color-incorrect);
+}
+.cat3 {
+  background: var(--cat-violet);
+}
+.cat4 {
+  background: var(--cat-sage);
+}
+.cat5 {
+  background: var(--cat-slate);
+}
+.cat6 {
+  background: var(--cat-rose);
+}
+.cat7 {
+  background: var(--cat-olive);
+}
+.cat8 {
+  background: var(--cat-deep-teal);
+}
+
 .page {
   max-width: var(--content-width-wide);
   margin: 0 auto;
@@ -248,15 +304,29 @@
   grid-template-columns: 150px 1fr 44px;
   align-items: center;
   gap: var(--space-3);
-  padding: var(--space-2) 0;
+  padding: var(--space-3) 0;
 }
 
 .barLabel {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
   font-size: var(--text-sm);
   color: var(--parchment);
   overflow: hidden;
+}
+
+.barLabelText {
+  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.barSwatch {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
 }
 
 .barTrack {
@@ -295,7 +365,8 @@
 .callout {
   border-radius: var(--radius);
   border: 1px solid var(--ink-line);
-  padding: var(--space-7) var(--space-6);
+  border-left-width: 4px;
+  padding: var(--space-8) var(--space-7);
 }
 
 .calloutTone {
@@ -305,13 +376,13 @@
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   color: var(--parchment-dim);
-  margin-bottom: var(--space-3);
+  margin-bottom: var(--space-4);
 }
 
 .calloutTone::before {
   content: "";
-  width: 7px;
-  height: 7px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: var(--ink-line);
   flex-shrink: 0;
@@ -320,15 +391,15 @@
 .calloutCat {
   font-family: var(--font-serif);
   font-weight: 500;
-  font-size: var(--text-2xl);
-  line-height: 1.3;
-  margin: 0 0 var(--space-3);
+  font-size: var(--text-3xl);
+  line-height: 1.25;
+  margin: 0 0 var(--space-4);
   /* always parchment, not the tone color — see the tone rules below for why */
   color: var(--parchment);
 }
 
 .calloutBody {
-  font-size: var(--text-base);
+  font-size: var(--text-md);
   color: var(--parchment-dim);
   line-height: 1.65;
   max-width: 58ch;
@@ -387,12 +458,17 @@
 }
 
 .queueNum {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   color: var(--color-accent);
-  width: 18px;
+  border: 1px solid var(--ink-line);
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
   flex-shrink: 0;
-  padding-top: 1px;
 }
 
 .queueStem {
@@ -486,6 +562,9 @@
 
   .barLabel {
     flex: 1 1 100%;
+  }
+
+  .barLabelText {
     white-space: normal;
   }
 
