@@ -1,5 +1,7 @@
 # ACAE — Adaptive Cognitive Assessment Engine
 
+*I2EDC Curiosity Projects 2026–27*
+
 ACAE is a JEE/NEET practice-question tool that doesn't just mark answers
 right or wrong — it figures out *why* a student keeps getting a topic
 wrong (careless mistake? misread the diagram? misunderstood the concept?
@@ -54,34 +56,61 @@ scripted alternative" below).
 ## Project layout
 
 ```
-topic_taxonomy.json      the 9 error categories + what they look like per subject
-schema.sql                the SQLite table definitions
-seed_questions_physics_*.json   the question bank, by topic
-load_questions.py         merges the seed files and loads them into acae.db
-cognitive_profiler.py      turns a student's attempt log into a weak-point profile
-weak_point_selector.py     picks the next questions to target that weak point
-remedial_engine.py         category -> explanation + drill sequence
-seed_and_simulate.py       demo/sample data: seeds a tiny DB + a synthetic biased student
+BLUEPRINT.md, README.md, schema.sql, topic_taxonomy.json
+seed_questions_physics.json (+ _energy/_kinematics/_mechanics variants)
 
-api.py                     Flask REST API (primary backend, Phase 6) — thin JSON
-                            wrapper around the modules above
-frontend/                  Next.js app (primary frontend, Phase 6) — quiz-taking
-                            and results screens, calling api.py via fetch()
+backend/                          Flask API + all diagnostic logic
+├── api.py                          Flask REST API — thin JSON wrapper around the modules below
+├── cognitive_profiler.py           turns a student's attempt log into a weak-point profile
+├── weak_point_selector.py          picks the next questions to target that weak point
+├── remedial_engine.py              category -> explanation + drill sequence
+├── db_helpers.py
+├── load_questions.py               merges the seed files and loads them into acae.db
+├── seed_and_simulate.py            demo/sample data: seeds a tiny DB + a synthetic biased student
+├── export_dashboard_data.py        snapshots a student's results (legacy dashboard format)
+├── seed_questions_physics.json     backend's own copy of the question bank
+├── requirements.txt
+└── acae.db, acae_demo.db           generated — gitignored
 
-app.py                     legacy: Streamlit app — quiz + results in one process
-run_quiz.py                 legacy: terminal quiz — answer questions, log attempts
-export_dashboard_data.py    legacy: snapshots a student's results to dashboard_data.json
-dashboard.html               legacy: the results view (opens dashboard_data.json)
+frontend/                         Next.js app (App Router) — quiz-taking and results screens,
+│                                    calling backend/api.py via fetch(). Built and maintained by
+│                                    Google AI Studio (see "Who builds what" below).
+├── app/ (page.tsx, results/, components/Header.tsx, components/ThemeToggle.tsx, ...)
+├── lib/api.ts                       fetch() wrapper around the Flask API
+├── package.json, tsconfig.json, next.config.ts
+└── .env.local
 
-start-dev.ps1               launches api.py + frontend's `npm run dev` in one command
+legacy/                           kept working, not primary anymore
+├── app.py                          Streamlit app — quiz + results in one process
+├── run_quiz.py                     terminal quiz — answer questions, log attempts
+├── export_dashboard_data.py        snapshots a student's results to dashboard_data.json
+├── dashboard.html                  the results view (opens dashboard_data.json)
+└── dashboard_data.json
+
+scripts/
+└── audit_frontend_integration.py   isolation audit — hashes everything outside frontend/,
+                                     snapshot/diff around every Google AI Studio handoff
+
+start-dev.ps1                     one-command launch: backend + frontend (Windows PowerShell)
 ```
+
+## Who builds what
+
+`frontend/` is built and maintained by **Google AI Studio** — strong at
+UI work, not used for backend/diagnostic logic. Everything else
+(`backend/`, `schema.sql`, `topic_taxonomy.json`, and, once built,
+`scrapers/`) is built and maintained by the team + Claude. Google AI
+Studio is only ever supposed to write inside `frontend/`; this is
+enforced, not just requested, by `scripts/audit_frontend_integration.py`,
+which hashes every file outside `frontend/` before a Google AI Studio
+handoff and diffs against that snapshot afterward, every time.
 
 ## Requirements
 
 - Python 3.9+
-- `flask` and `flask-cors`, for the primary Flask API (`pip install flask
-  flask-cors`) — not needed if you're only using the legacy scripted flow
-  below, since everything there is standard library
+- `flask` and `flask-cors`, for the primary Flask API (`pip install -r
+  backend/requirements.txt`) — not needed if you're only using the legacy
+  scripted flow below, since everything there is standard library
 - Node.js 18.18+, for the primary Next.js frontend — not needed for any
   of the legacy alternatives
 - `streamlit`, only if you're using the legacy Streamlit app
@@ -89,17 +118,18 @@ start-dev.ps1               launches api.py + frontend's `npm run dev` in one co
 
 ## How to run it
 
-All commands below assume you're in this project folder in a terminal.
+All commands below assume you're in this project's root folder in a
+terminal, unless a `cd` is shown.
 
 ### Quickest path: one script (Windows / PowerShell)
 
-Once the database is built (step 1 below), `./start-dev.bat` launches
-both the Flask API and the Next.js frontend for you — each in its own
-window — instead of opening two terminals and `cd`-ing into `frontend`
-by hand:
+Once the database is built (step 1 below), `./start-dev.ps1` launches
+both the Flask API (`backend/api.py`) and the Next.js frontend (`npm run
+dev` in `frontend/`) for you — each in its own window — instead of
+opening two terminals and `cd`-ing by hand:
 
 ```
-./start-dev
+./start-dev.ps1
 ```
 
 Add `-NoNewWindows` to run both as background jobs in the current window
@@ -112,19 +142,21 @@ rather run them yourself or aren't on PowerShell.
 ### 1. Build the question database
 
 ```
+cd backend
 python load_questions.py
 ```
 
-This merges the three topic JSON files into `seed_questions_physics.json`
-and loads everything into `acae.db` (created automatically). Safe to
+This merges the topic JSON files into `seed_questions_physics.json` and
+loads everything into `backend/acae.db` (created automatically). Safe to
 re-run any time — it upserts rather than duplicating.
 
 ### 2. Run the Flask API
 
-In its own terminal, from the project root:
+In its own terminal, from `backend/`:
 
 ```
-pip install flask flask-cors
+cd backend
+pip install -r requirements.txt
 python api.py
 ```
 
@@ -149,8 +181,8 @@ custom quiz-taking screen and a results screen, both talking to the
 Flask API from step 2 via `fetch()`:
 
 - **Quiz** (`/`) — pick a student ID and topic and answer questions one
-  at a time, same mechanics as `run_quiz.py` below but in the browser,
-  with immediate correct/incorrect feedback per question.
+  at a time, same mechanics as `legacy/run_quiz.py` below but in the
+  browser, with immediate correct/incorrect feedback per question.
 - **Results** (`/results`) — the fault map (wrong answers broken down by
   category), the dominant weak point call-out once there's enough data
   to be confident about it, the remedial pathway, and the next-up
@@ -158,9 +190,10 @@ Flask API from step 2 via `fetch()`:
 
 Either screen offers a **"See a sample result"** button — it calls
 `POST /api/sample/generate` to seed a synthetic biased student into its
-own `acae_demo.db` (never touching your real `acae.db`), then loads that
-student's results from `GET /api/results/sample`. Sample results are
-clearly labeled on screen, with a one-click way back to your real data.
+own `backend/acae_demo.db` (never touching your real `acae.db`), then
+loads that student's results from `GET /api/results/sample`. Sample
+results are clearly labeled on screen, with a one-click way back to your
+real data.
 
 `frontend/.env.local` points the frontend at the API
 (`NEXT_PUBLIC_API_BASE_URL=http://127.0.0.1:5000` by default) — change it
@@ -169,15 +202,16 @@ if you're running the API somewhere else, then restart `npm run dev`
 
 ### Legacy / scripted alternative
 
-Two older ways to run ACAE still work and are kept around — neither is
-the primary way to use it anymore, but both are handy for headless
-testing, scripting against the DB directly, or if you'd rather run one
-process instead of two.
+Two older ways to run ACAE still work and are kept around, in `legacy/`
+— neither is the primary way to use it anymore, but both are handy for
+headless testing, scripting against the DB directly, or if you'd rather
+run one process instead of two.
 
 **Streamlit app** — quiz and results together in one browser tab, no
 separate API/frontend processes:
 
 ```
+cd legacy
 pip install streamlit
 streamlit run app.py
 ```
@@ -199,6 +233,7 @@ last step, or script against the DB directly:
 **Take a quiz:**
 
 ```
+cd legacy
 python run_quiz.py
 ```
 
@@ -240,6 +275,7 @@ a student with a deliberately biased weak point, so the profiler has
 something real to find immediately:
 
 ```
+cd backend
 python seed_and_simulate.py
 ```
 
@@ -260,7 +296,7 @@ have it, rather than re-answering the full quiz on every test run.
 ## Peeking inside the database (optional)
 
 ```
-sqlite3 acae.db
+sqlite3 backend/acae.db
 .tables
 SELECT COUNT(*) FROM questions;
 .quit
@@ -275,21 +311,24 @@ Python) is what the scripts actually use.
 | What you see | What it means | What to do |
 |---|---|---|
 | `ModuleNotFoundError: No module named 'X'` | A required package isn't installed | `pip install X` |
-| `FileNotFoundError` | Wrong folder, or a file hasn't been created yet | Confirm you're in the project folder; run `python load_questions.py` first if `acae.db` doesn't exist yet |
-| `sqlite3.OperationalError: database is locked` | Two scripts tried to use `acae.db` at the same time | Close any other window/script touching `acae.db`, then retry |
-| Dashboard shows "No attempts logged for this topic yet" | You haven't run `run_quiz.py` for that student/topic (or haven't hit the confidence threshold) | Answer more questions, or use `seed_and_simulate.py` for an instant example |
-| Frontend shows "Couldn't reach the API at http://127.0.0.1:5000" | `python api.py` isn't running, or it's running on a different port than `frontend/.env.local` expects | Start `python api.py` in its own terminal first; confirm the two match |
-| CORS error in the browser console | Rare — `flask-cors` didn't load | Confirm `pip install flask-cors` succeeded; `api.py` already calls `CORS(app)` |
+| `FileNotFoundError` | Wrong folder, or a file hasn't been created yet | Confirm you're in `backend/` (or `legacy/`) for the script you're running; run `python load_questions.py` first if `backend/acae.db` doesn't exist yet |
+| `sqlite3.OperationalError: database is locked` | Two scripts tried to use `acae.db` at the same time | Close any other window/script touching `backend/acae.db`, then retry |
+| Dashboard shows "No attempts logged for this topic yet" | You haven't run `legacy/run_quiz.py` for that student/topic (or haven't hit the confidence threshold) | Answer more questions, or use `backend/seed_and_simulate.py` for an instant example |
+| Frontend shows "Couldn't reach the API at http://127.0.0.1:5000" | `python api.py` isn't running in `backend/`, or it's running on a different port than `frontend/.env.local` expects | Start `python api.py` (from `backend/`) in its own terminal first; confirm the two match |
+| CORS error in the browser console | Rare — `flask-cors` didn't load | Confirm `pip install -r backend/requirements.txt` succeeded; `api.py` already calls `CORS(app)` |
 | `npm run dev` fails immediately | Dependencies not installed, or Node too old | Run `npm install` inside `frontend/`; confirm Node 18.18+ with `node --version` |
 
-## Known frontend issues (being fixed — see BLUEPRINT.md §11.3, 6H)
+## Known frontend issues (being fixed — see BLUEPRINT.md §12.3, sub-phase 6H)
 
-The Next.js UI's visual redesign is functional but not finished:
-typography doesn't read as modern/elegant yet, some text/background
-pairings fall short of good contrast, and the topic/student `<select>`
-dropdown doesn't restyle with the theme — it's still visibly the
-browser's default control, hard to read in dark mode. No diagnostic
-logic is affected by any of this.
+The Next.js UI's visual redesign (Phase 6.5) is functional but not yet
+finished: typography doesn't read as modern/elegant yet, some
+text/background pairings fall short of good contrast (asserted so far,
+not yet independently verified against a contrast tool), and the
+topic/student `<select>` dropdown doesn't restyle with the theme — it's
+still visibly the browser's default control, hard to read in dark mode.
+A dedicated fix pass (6H) covering all three, plus a general
+responsive/accessibility polish sweep, is the current work in progress.
+No diagnostic logic is affected by any of this.
 
 ## Caveats worth knowing before presenting this
 
@@ -308,3 +347,9 @@ See `BLUEPRINT.md` §8 for the full list — the short version:
   `weak_point_selector.py` / `remedial_engine.py` changed to build it.
   The added risk is plumbing: two dev servers to keep running instead of
   one, and the API/frontend JSON contract drifting out of sync.
+- The question bank is still small (45 hand-tagged Physics MCQs).
+  Growing it to thousands of real PYQs across JEE Main, JEE Advanced and
+  NEET is Phase 7, planned but not yet started — see BLUEPRINT.md §12.4.
+- Handing `frontend/` to an external tool (Google AI Studio) for UI work
+  is an isolation risk as much as a UI-quality one — see "Who builds
+  what" above and BLUEPRINT.md §8 for how that's contained.
