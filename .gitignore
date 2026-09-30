@@ -3,5 +3,6 @@
 *.sql
 # *.json
 project_code.zip
+frontend/
 
 .handoff-map.json
