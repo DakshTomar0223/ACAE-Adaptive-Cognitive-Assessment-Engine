@@ -1,0 +1,9 @@
+[
+  "BACKEND_BLUEPRINT.md",
+  "backend/cognitive_profiler.py",
+  "backend/db_helpers.py",
+  "backend/remedial_engine.py",
+  "backend/schema.sql",
+  "backend/topic_taxonomy.json",
+  "backend/weak_point_selector.py"
+]

@@ -6,3 +6,6 @@ project_code.zip
 frontend/
 
 .handoff-map.json
+
+!backend/schema.sql
+backend/seed_questions_physics.json

@@ -13,7 +13,7 @@ import datetime
 import os
 
 DB_PATH = os.path.join(os.path.dirname(__file__), "acae_demo.db")
-SCHEMA_PATH = os.path.join(os.path.dirname(__file__), "..", "schema.sql")
+SCHEMA_PATH = os.path.join(os.path.dirname(__file__), "schema.sql")
 
 random.seed(7)
 

@@ -1,9 +1,9 @@
 """
 check_blueprint.py (ACAE)
 
-Checks the actual repo state against BLUEPRINT.md's current Phase 6.5/7
+Checks the actual repo state against BACKEND_BLUEPRINT.md's current Phase 6.5/7
 lettered sub-phases, tells you which one to work on next, and (with
---apply) syncs BLUEPRINT.md's Section 5 status-table rows for "6.5" and
+--apply) syncs BACKEND_BLUEPRINT.md's Section 5 status-table rows for "6.5" and
 "7" to match reality.
 
 Ported from the Nifty multi-strategy research platform's own
@@ -27,9 +27,9 @@ rather than oversight:
    to "fix" by trying to regex-detect good typography.
 
 Run from the project root (same convention as Nifty's project):
-    python check_blueprint.py               # report only, no file changes
-    python check_blueprint.py --apply       # also sync BLUEPRINT.md's status table
-    python check_blueprint.py --signoff 6H  # record a manually-verified sub-phase
+    python scripts/check_blueprint.py               # report only, no file changes
+    python scripts/check_blueprint.py --apply       # also sync BACKEND_BLUEPRINT.md's status table
+    python scripts/check_blueprint.py --signoff 6H  # record a manually-verified sub-phase
 """
 
 import json
@@ -42,8 +42,8 @@ from rich.panel import Panel
 from rich.table import Table
 
 console = Console()
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-BLUEPRINT_PATH = os.path.join(PROJECT_ROOT, "BLUEPRINT.md")
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BLUEPRINT_PATH = os.path.join(PROJECT_ROOT, "BACKEND_BLUEPRINT.md")
 SIGNOFF_PATH = os.path.join(PROJECT_ROOT, ".phase_signoff.json")
 
 
@@ -78,7 +78,7 @@ def _handle_signoff_flag(argv: list) -> bool:
     idx = argv.index("--signoff")
     ids = [a for a in argv[idx + 1:] if not a.startswith("--")]
     if not ids:
-        console.print("[bold red]Usage:[/bold red] python check_blueprint.py --signoff <id> [<id> ...]")
+        console.print("[bold red]Usage:[/bold red] python scripts/check_blueprint.py --signoff <id> [<id> ...]")
         return True
     signed = _load_signoffs()
     signed |= set(ids)
@@ -86,7 +86,7 @@ def _handle_signoff_flag(argv: list) -> bool:
     console.print(f"[bold green]✔ Recorded manual sign-off ({len(ids)}):[/bold green] {', '.join(ids)}")
     console.print(
         "[dim]Only sign off a sub-phase after you've actually worked through its "
-        "after-response checklist in BLUEPRINT.md -- this file is trusted at face value.[/dim]"
+        "after-response checklist in BACKEND_BLUEPRINT.md -- this file is trusted at face value.[/dim]"
     )
     return True
 
@@ -132,7 +132,7 @@ def manual_signoff(sub_id: str):
     def _check():
         signed = _load_signoffs()
         ok = sub_id in signed
-        detail = "manually signed off" if ok else f"not yet signed off -- run: python check_blueprint.py --signoff {sub_id}"
+        detail = "manually signed off" if ok else f"not yet signed off -- run: python scripts/check_blueprint.py --signoff {sub_id}"
         return ok, detail
     _check.label = "manual sign-off"
     return _check
@@ -142,7 +142,7 @@ def manual_signoff(sub_id: str):
 # Phase registry
 # --------------------------------------------------------------------------
 # Each entry: (id, short name, [check_fn, ...]). A sub-phase is "done" only
-# when every one of its checks passes. Order here is the order BLUEPRINT.md
+# when every one of its checks passes. Order here is the order BACKEND_BLUEPRINT.md
 # presents them in, which is also the order "NEXT UP" walks through.
 
 PHASES = [
@@ -222,7 +222,7 @@ def top_level_status(sub_ids: list, results: dict) -> str:
 
 
 # --------------------------------------------------------------------------
-# BLUEPRINT.md status-table sync (--apply)
+# BACKEND_BLUEPRINT.md status-table sync (--apply)
 # --------------------------------------------------------------------------
 
 STATUS_LABEL = {
@@ -263,7 +263,7 @@ def sync_status_table(blueprint_text: str, all_results: dict) -> str:
 # --------------------------------------------------------------------------
 
 def print_report(all_results: dict):
-    table = Table(title="ACAE — BLUEPRINT.md sub-phase status", border_style="cyan")
+    table = Table(title="ACAE — BACKEND_BLUEPRINT.md sub-phase status", border_style="cyan")
     table.add_column("ID", style="bold cyan", no_wrap=True)
     table.add_column("Sub-phase", style="white")
     table.add_column("Status", justify="center")
@@ -297,7 +297,7 @@ def main():
         return
 
     if not os.path.isfile(BLUEPRINT_PATH):
-        console.print(f"[bold red]Error:[/bold red] BLUEPRINT.md not found at {BLUEPRINT_PATH}")
+        console.print(f"[bold red]Error:[/bold red] BACKEND_BLUEPRINT.md not found at {BLUEPRINT_PATH}")
         sys.exit(1)
 
     all_results = run_all_checks()
@@ -312,7 +312,7 @@ def main():
                 f.write(updated)
             console.print(f"\n[bold green]Updated {BLUEPRINT_PATH}'s Section 5 status table.[/bold green]")
         else:
-            console.print("\n[dim]BLUEPRINT.md's status table already matches current results -- no changes made.[/dim]")
+            console.print("\n[dim]BACKEND_BLUEPRINT.md's status table already matches current results -- no changes made.[/dim]")
 
 
 if __name__ == "__main__":

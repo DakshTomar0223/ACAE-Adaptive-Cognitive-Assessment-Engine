@@ -5,13 +5,13 @@ from pathlib import Path
 
 # Input/Output configuration
 SEED_FILES = [
-    "../seed_questions_physics_kinematics.json",
-    "../seed_questions_physics_mechanics.json",
-    "../seed_questions_physics_energy.json",
+    Path(__file__).resolve().parent / "seeds" / "seed_questions_physics_kinematics.json",
+    Path(__file__).resolve().parent / "seeds" / "seed_questions_physics_mechanics.json",
+    Path(__file__).resolve().parent / "seeds" / "seed_questions_physics_energy.json",
 ]
-MERGED_OUTPUT_FILE = "seed_questions_physics.json"
-DB_PATH = "acae.db"
-SCHEMA_PATH = "../schema.sql"
+MERGED_OUTPUT_FILE = Path(__file__).resolve().parent / "seed_questions_physics.json"
+DB_PATH = Path(__file__).resolve().parent / "acae.db"
+SCHEMA_PATH = Path(__file__).resolve().parent / "schema.sql"
 
 
 def load_and_merge_seed_data(file_paths: list[str]) -> list[dict]:
