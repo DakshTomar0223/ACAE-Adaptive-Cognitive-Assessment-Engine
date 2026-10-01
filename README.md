@@ -17,7 +17,7 @@ repeated across enough questions in a topic.
 
 For the full architecture, the 9-category error taxonomy, what's built vs.
 still planned, and the caveats worth knowing before presenting this — see
-[`BLUEPRINT.md`](./BLUEPRINT.md).
+[`BACKEND_BLUEPRINT.md`](./BACKEND_BLUEPRINT.md).
 
 ---
 
@@ -56,8 +56,8 @@ scripted alternative" below).
 ## Project layout
 
 ```
-BLUEPRINT.md, README.md, schema.sql, topic_taxonomy.json
-seed_questions_physics.json (+ _energy/_kinematics/_mechanics variants)
+BACKEND_BLUEPRINT.md, README.md
+scripts/ (check_blueprint, assemble_handoff, check_boundaries), contract/CONTRACT.md, legacy/archive/
 
 backend/                          Flask API + all diagnostic logic
 ├── api.py                          Flask REST API — thin JSON wrapper around the modules below
@@ -68,9 +68,11 @@ backend/                          Flask API + all diagnostic logic
 ├── load_questions.py               merges the seed files and loads them into acae.db
 ├── seed_and_simulate.py            demo/sample data: seeds a tiny DB + a synthetic biased student
 ├── export_dashboard_data.py        snapshots a student's results (legacy dashboard format)
-├── seed_questions_physics.json     backend's own copy of the question bank
+├── schema.sql
+├── topic_taxonomy.json
+├── seeds/                          per-topic question files (energy, kinematics, mechanics)
 ├── requirements.txt
-└── acae.db, acae_demo.db           generated — gitignored
+└── acae.db, acae_demo.db, seed_questions_physics.json           generated — gitignored
 
 frontend/                         Next.js app (App Router) — quiz-taking and results screens,
 │                                    calling backend/api.py via fetch(). Built and maintained by
@@ -146,7 +148,7 @@ cd backend
 python load_questions.py
 ```
 
-This merges the topic JSON files into `seed_questions_physics.json` and
+This merges the topic files in `backend/seeds/` into `seed_questions_physics.json` (generated, gitignored) and
 loads everything into `backend/acae.db` (created automatically). Safe to
 re-run any time — it upserts rather than duplicating.
 
@@ -318,7 +320,7 @@ Python) is what the scripts actually use.
 | CORS error in the browser console | Rare — `flask-cors` didn't load | Confirm `pip install -r backend/requirements.txt` succeeded; `api.py` already calls `CORS(app)` |
 | `npm run dev` fails immediately | Dependencies not installed, or Node too old | Run `npm install` inside `frontend/`; confirm Node 18.18+ with `node --version` |
 
-## Known frontend issues (being fixed — see BLUEPRINT.md §12.3, sub-phase 6H)
+## Known frontend issues (being fixed — see BACKEND_BLUEPRINT.md §12.3, sub-phase 6H)
 
 The Next.js UI's visual redesign (Phase 6.5) is functional but not yet
 finished: typography doesn't read as modern/elegant yet, some
@@ -332,7 +334,7 @@ No diagnostic logic is affected by any of this.
 
 ## Caveats worth knowing before presenting this
 
-See `BLUEPRINT.md` §8 for the full list — the short version:
+See `BACKEND_BLUEPRINT.md` §8 for the full list — the short version:
 
 - Distractor-mapping quality is everything; the seed questions were
   human-reviewed, not taken raw from an LLM.
@@ -349,7 +351,7 @@ See `BLUEPRINT.md` §8 for the full list — the short version:
   one, and the API/frontend JSON contract drifting out of sync.
 - The question bank is still small (45 hand-tagged Physics MCQs).
   Growing it to thousands of real PYQs across JEE Main, JEE Advanced and
-  NEET is Phase 7, planned but not yet started — see BLUEPRINT.md §12.4.
+  NEET is Phase 7, planned but not yet started — see BACKEND_BLUEPRINT.md §12.4.
 - Handing `frontend/` to an external tool (Google AI Studio) for UI work
   is an isolation risk as much as a UI-quality one — see "Who builds
-  what" above and BLUEPRINT.md §8 for how that's contained.
+  what" above and BACKEND_BLUEPRINT.md §8 for how that's contained.
